@@ -1,6 +1,7 @@
 import Animation from "@/components/home/Animation";
 import Crafts from "@/components/home/Crafts";
 import Heroarea from "@/components/home/Heroarea";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Heroarea />
       <Animation />
       <Crafts />
+      {/* <Testimonials /> */}
     </div>
   );
 }

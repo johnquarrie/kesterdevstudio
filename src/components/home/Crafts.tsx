@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionWrapper } from "@/utils/hoc";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import EarthCanvas from "../canvas/Earth";
 import { GoStack } from "react-icons/go";
 import { CiGlobe, CiPen } from "react-icons/ci";
@@ -88,7 +88,74 @@ const crafts = [
 
 const Crafts = () => {
   const { width } = useWindowSize();
-  const isMobile = width < 1025;
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure we're on the client side before rendering positioned elements
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Helper function to get current breakpoint
+  const getBreakpoint = (width: number) => {
+    if (width > 1025) return "desktop";
+    if (width > 576) return "tab";
+    if (width > 480) return "miniTab";
+    return "mobile";
+  };
+
+  // Don't render positioned elements until we're sure we're on client
+  if (!isClient || !width) {
+    return (
+      <div className="w-full relative flex h-screen justify-center items-center overflow-hidden">
+        {/* Background blur effects */}
+        <div
+          style={{
+            position: "absolute",
+            width: "285.38px",
+            height: "285.38px",
+            top: "-0.38px",
+            left: "-124.88px",
+            borderRadius: "50%",
+            background: "#6C0BDB",
+            opacity: 0.3,
+            filter: "blur(107.09px)",
+            zIndex: 0,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            width: "220.63px",
+            height: "220.63px",
+            top: "371.13px",
+            right: "-5%",
+            borderRadius: "50%",
+            background: "#6C0BDB",
+            opacity: 0.5,
+            filter: "blur(100.85px)",
+            zIndex: 0,
+          }}
+        />
+
+        {/* Earth Canvas - centered */}
+        <div className="absolute inset-0 flex justify-center items-center z-5">
+          <EarthCanvas scale={2} />
+        </div>
+
+        {/* Centered text overlay */}
+        <div className="text-white absolute w-full h-full flex flex-col justify-center items-center gap-3 xs:gap-5 text-center z-10">
+          <h1 className="w-[95%] 2xs:w-[90%] md:w-[75%] lg:w-[70%] xl:w-[75%] 2xl:w-[60%] text-3xl 2xs:text-4xl xs:text-5xl xl:text-6xl font-future shadow-3xl">
+            We Turn Imagination Into Interactive Reality
+          </h1>
+          <p className="text-center text-sm sm:text-base w-[80%] 2xs:w-[70%] xs:w-[60%] md:w-[50%] lg:w-[45%] xl:w-[40%]">
+            Bringing bold ideas to life through immersive digital experiences.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const currentBreakpoint = getBreakpoint(width);
 
   return (
     <div className="w-full relative flex h-screen justify-center items-center overflow-hidden">
@@ -138,16 +205,11 @@ const Crafts = () => {
           }
         />
       </div>
+
       {/* Scattered craft tags */}
       {crafts.map((craft, index) => {
-        const pos =
-          width > 1025
-            ? craft.position.desktop
-            : width < 1025 && width > 576
-            ? craft.position.tab
-            : width < 576 && width > 480
-            ? craft.position.miniTab
-            : craft.position.mobile;
+        const pos = craft.position[currentBreakpoint];
+
         return (
           <motion.div
             key={index}
