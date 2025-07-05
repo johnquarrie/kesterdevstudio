@@ -1,26 +1,129 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #6c0bdb;
+
+  --breakpoint-3xs: 320px;
+  --breakpoint-2xs: 480px;
+  --breakpoint-xs: 576px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1600px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: "future";
+  src: url("/fonts/batmfa.ttf") format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-inter);
+    font-weight: 400;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .font-light {
+    font-family: var(--font-inter);
+    font-weight: 300;
+  }
+  .font-regular {
+    font-family: var(--font-inter);
+    font-weight: 400;
+  }
+  .font-medium {
+    font-family: var(--font-inter);
+    font-weight: 500;
+  }
+  .font-semibold {
+    font-family: var(--font-inter);
+    font-weight: 600;
+  }
+  .font-bold {
+    font-family: var(--font-inter);
+    font-weight: 700;
+  }
+  .font-extrabold {
+    font-family: var(--font-inter);
+    font-weight: 800;
+  }
+  .font-black {
+    font-family: var(--font-inter);
+    font-weight: 900;
+  }
+
+  /* CUSTOM FONTS */
+  .font-future {
+    font-family: "future", sans-serif;
+  }
+}
+
+.container {
+  @apply mx-auto max-w-[90%] 2xl:max-w-[95%];
+}
+
+/* Corner border effect for tag boxes */
+.corner-border {
+  position: relative;
+}
+.corner-border::before,
+.corner-border::after,
+.corner-border .corner-tl,
+.corner-border .corner-bl {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #fff;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+.corner-border::before {
+  /* top-left */
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+.corner-border::after {
+  /* bottom-right */
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+.corner-border .corner-tl {
+  /* top-right */
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+.corner-border .corner-bl {
+  /* bottom-left */
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
 }
