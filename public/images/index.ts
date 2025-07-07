@@ -1,5 +1,7 @@
 import logo from "./logo.png";
 import heroBg from "./hero-bg.svg";
+import aboutHeader from "./about-header.png"
+import haze from "./icons/haze.svg"
 
 import test1 from "./testimonials/test1.jpg";
 import test2 from "./testimonials/test2.jpg";
@@ -11,4 +13,6 @@ export default {
   logo,
   heroBg,
   testimonials,
+  aboutHeader,
+  haze,
 };

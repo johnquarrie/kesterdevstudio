@@ -127,3 +127,33 @@
   border-right: none;
   border-top: none;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scroll-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 2rem;
+  animation: scroll 40s linear infinite;
+}
+
+.scroll-container:hover .scroll-content {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
