@@ -55,10 +55,9 @@ export const zoomIn = (delay: number, duration: number) => {
       scale: 1,
       opacity: 1,
       transition: {
-        type: "tween",
-        delay: delay,
+        type: "tween" as const,
         duration: duration,
-        ease: "easeOut",
+        delay: delay,
       },
     },
   };
@@ -111,8 +110,8 @@ export const scaleVariants = {
     scale: [0, 1],
     opacity: [0, 1],
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: 0.8,
+      ease: "easeInOut" as const,
     },
   },
 };

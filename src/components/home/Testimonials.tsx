@@ -1,6 +1,23 @@
+"use client";
 import images from "@/public/images";
+import { SectionWrapper } from "@/utils/hoc";
+import { textVariant, zoomIn } from "@/utils/motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 import React from "react";
+import { HiOutlineStar, HiStar } from "react-icons/hi";
+
+const Stars = ({ stars }: { stars: number }) => (
+  <div className="flex items-center text-2xl">
+    {[...Array(5)].map((_, i) =>
+      i < stars ? (
+        <HiStar key={i} className="text-[#6C0BDB]" />
+      ) : (
+        <HiOutlineStar key={i} className="text-[#A6A6A680]" />
+      )
+    )}
+  </div>
+);
 
 const Testimonials = () => {
   const testimonials = [
@@ -30,15 +47,28 @@ const Testimonials = () => {
     },
   ];
   return (
-    <div className="w-full py-40">
-      <div className="container flex flex-col gap-5">
-        <h1 className="font-future text-5xl text-white">testimonials</h1>
+    <div className="w-full py-5 2xs:py-10 sm:py-20">
+      <div className="container w-full lg:w-[90%] 2xl:w-[85%] flex flex-col justify-center items-center gap-6">
+        <motion.div
+          variants={textVariant(0.05)}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col gap-2"
+        >
+          <h1 className="font-future text-3xl 2xs:text-4xl lg:text-5xl text-white text-center">
+            testimonials
+          </h1>
+        </motion.div>
 
-        <div className="grid grid-cols-3 gsp-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {testimonials.map((testimonial, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex flex-col gap-5 bg-[#151515] border border-[#151515] rounded-lg"
+              variants={zoomIn(index * 0.15, 0.6)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex flex-col gap-5 bg-[#151515] border border-[#151515] rounded-lg px-5 py-5"
             >
               <div className="flex flex-col gap-3.5">
                 <div className="flex items-center gap-3">
@@ -48,6 +78,7 @@ const Testimonials = () => {
                       src={testimonial.profile}
                       fill
                       style={{ objectFit: "cover" }}
+                      className="rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -59,8 +90,13 @@ const Testimonials = () => {
                     </p>
                   </div>
                 </div>
+                <p className="text-base italic text-[#A6A6A6]">
+                  {testimonial.testimonial}
+                </p>
               </div>
-            </div>
+
+              <Stars stars={testimonial.stars} />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -68,4 +104,4 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+export default SectionWrapper(Testimonials, "testimonial");
