@@ -13,7 +13,7 @@ const AboutHeader = () => {
     <header className="relative w-full min-h-screen h-full flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <Image
-        src={images.aboutHeader}
+        src="/images/about-header.png"
         alt="Hero"
         fill
         style={{ objectFit: "cover", objectPosition: "center" }}
@@ -27,7 +27,7 @@ const AboutHeader = () => {
       {/* Top Right Haze */}
       <div className="absolute top-40 left-0 w-80 h-80 rotate-180 z-0 pointer-events-none">
         <Image
-          src={images.haze}
+          src="/images/icons/haze.svg"
           alt="Haze Top Right"
           fill
           style={{ objectFit: "contain" }}
@@ -39,7 +39,7 @@ const AboutHeader = () => {
       {/* Bottom Left Haze */}
       <div className="absolute bottom-20 right-0 w-80 h-80 z-0 pointer-events-none">
         <Image
-          src={images.haze}
+          src="/images/icons/haze.svg"
           alt="Haze Bottom Left"
           fill
           style={{ objectFit: "contain" }}
