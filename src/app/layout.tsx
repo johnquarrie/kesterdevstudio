@@ -4,6 +4,8 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Navbar from "@/components/Navbar";
 import WhatsAppChatbot from "@/components/WhatsappChatbot";
+import Cta from "@/components/Cta";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +31,8 @@ export default function RootLayout({
         <main className="flex flex-col w-full relative bg-black">
           <Navbar />
           {children}
+          <Cta />
+          <Footer />
         </main>
         <WhatsAppChatbot phoneNumber="2348163577508" />
       </body>

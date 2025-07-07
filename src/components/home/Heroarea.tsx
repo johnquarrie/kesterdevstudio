@@ -9,17 +9,7 @@ import { SectionWrapper } from "@/utils/hoc";
 import { textVariant, fadeIn } from "@/utils/motion";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
-
-const tags = [
-  "games",
-  "apps",
-  "web",
-  "ai & bots",
-  "web3 & blockchain",
-  "software",
-  "2d/3d design",
-  "modeling & animation",
-];
+import { tags } from "@/constants";
 
 const Heroarea = () => {
   const { width } = useWindowSize();
@@ -34,8 +24,8 @@ const Heroarea = () => {
         priority
       />
 
-      <div className="container relative  lg:mb-24 z-20 w-full flex gap-24 xl:gap-28 2xl:gap-40 3xl:gap-48 items-end justify-between">
-        <div className="flex flex-col gap-4 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+      <div className="container relative lg:mb-24 z-30 w-full flex gap-24 xl:gap-28 2xl:gap-40 3xl:gap-48 items-end justify-between">
+        <div className="relative flex flex-col gap-4 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
           <motion.div
             variants={textVariant(0.05)}
             initial="hidden"
@@ -47,11 +37,14 @@ const Heroarea = () => {
             </h1>
             <p className="text-sm 2xs:text-base text-white/50 w-[90%] lg:w-[80%] xl:w-[70%]">
               From games to apps, web to blockchain, AI, 2D and 3D animation. We
-              blend creativity and code to bring bold ideas to life. If it’s
+              blend creativity and code to bring bold ideas to life. If it's
               digital, we build it.
             </p>
           </motion.div>
-          <AnimatedButton clipSize={14} className="w-fit px-8 py-3.5 ">
+          <AnimatedButton
+            clipSize={14}
+            className="w-fit px-8 py-3 cursor-pointer"
+          >
             get started
           </AnimatedButton>
         </div>
@@ -80,7 +73,7 @@ const Heroarea = () => {
         </div>
       </div>
 
-      <div className="z-40 absolute bottom-16 xl:bottom-24 w-full flex justify-center items-center">
+      <div className="z-30 absolute bottom-16 xl:bottom-24 left-1/2 transform -translate-x-1/2 ">
         <a
           href="#animation"
           className="cursor-pointer inline-block p-4 hover:scale-110 transition-transform duration-200"

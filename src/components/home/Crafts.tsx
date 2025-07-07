@@ -106,7 +106,7 @@ const Crafts = () => {
   // Don't render positioned elements until we're sure we're on client
   if (!isClient || !width) {
     return (
-      <div className="w-full relative flex h-screen justify-center items-center overflow-hidden">
+      <div className="w-full relative flex h-full justify-center items-center overflow-hidden">
         {/* Background blur effects */}
         <div
           style={{
