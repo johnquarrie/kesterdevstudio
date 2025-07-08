@@ -17,7 +17,7 @@ const WhatsAppChatbot: React.FC<WhatsAppChatbotProps> = ({
     <FloatingWhatsApp
       accountName="Kester Studio"
       phoneNumber={phoneNumber}
-      avatar={"/images/logo.png"}
+      avatar={"/images/kester-logo.png"}
       allowClickAway={false}
       notification={true}
       notificationDelay={60}
