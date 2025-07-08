@@ -1,6 +1,7 @@
 import { IoLogoInstagram, IoLogoTiktok } from "react-icons/io5";
 import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { BiLogoFacebook } from "react-icons/bi";
+import images from "@/public/images";
 
 export const navLinks = [
   {
@@ -171,8 +172,8 @@ export const faqs = [
     question: "What is your process for starting a new project?",
     answer:
       "Our process includes an initial consultation, project discovery, requirement gathering, design prototypes, iterative development, testing, and deployment. We keep you involved every step of the way.",
-  }
-]
+  },
+];
 
 export const tags = [
   "games",
@@ -209,5 +210,105 @@ export const socials = [
   {
     icon: FaLinkedinIn,
     url: "#",
+  },
+];
+
+export const portfolio = [
+  {
+    id: 1,
+    image: images.portfolio.port1,
+    tag: "UI/UX / DEVELOPMENT / 3D",
+    category: "3D Design",
+    name: "Example Project",
+    description: "A platform design about a shopping website",
+  },
+  {
+    id: 2,
+    image: images.portfolio.port2,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "App Development",
+    name: "Web3.Future",
+    description: "A platform design about a shopping website",
+  },
+  {
+    id: 3,
+    image: images.portfolio.port3,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "Blockchain Development",
+    name: "Example Project",
+    description: "A platform design about a shopping website",
+  },
+  {
+    id: 4,
+    image: images.portfolio.port4,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "Game Development",
+    name: "Example Project",
+    description: "A platform design about a shopping website",
+  },
+];
+
+export const Details = [
+  {
+    id: 1,
+    image: images.portfolio.port1,
+    tag: "UI/UX / DEVELOPMENT / 3D",
+    category: "3D Design",
+    title: "Example Project",
+    description: "A platform design about a shopping website",
+    services: ["Branding", "Strategy", "UI/UX Design", "Web Design"],
+    problem:
+      "Users struggled to track finances across multiple accounts with outdated dashboards and poor information hierarchy.",
+    solution:
+      "We designed a clean, modular interface that supports dynamic account linking, personalized budget visuals, and adaptive notifications for better financial insights.",
+  },
+  {
+    id: 2,
+    image: images.portfolio.port2,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "App Development",
+    title: "Web3.Future",
+    description: "A platform design about a shopping website",
+    services: [
+      "Blockchain Integration",
+      "UI/UX Design",
+      "Security",
+      "Smart Contracts",
+    ],
+    problem:
+      "Users lacked a simple and secure interface to manage their crypto assets and interact with decentralized applications.",
+    solution:
+      "We built a secure wallet with biometric authentication and seamless DApp integration, improving transaction visibility and user trust.",
+  },
+  {
+    id: 3,
+    image: images.portfolio.port3,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "Blockchain Development",
+    title: "Example Project",
+    description: "A platform design about a shopping website",
+    services: ["Game Design", "3D Animation", "Mobile Development", "UI Art"],
+    problem:
+      "The game lacked an engaging storyline and compelling visuals, leading to low retention among beta testers.",
+    solution:
+      "Our team redesigned the narrative arc, introduced multiplayer co-op gameplay, and upgraded character animations to enhance immersion.",
+  },
+  {
+    id: 4,
+    image: images.portfolio.port4,
+    tag: "UI/UX / DEVELOPMENT",
+    category: "Game Development",
+    title: "Example Project",
+    description: "A platform design about a shopping website",
+    services: [
+      "UX Research",
+      "SEO Optimization",
+      "Responsive Design",
+      "Content Strategy",
+    ],
+    problem:
+      "The website had high bounce rates due to poor mobile experience and lack of clear property filters.",
+    solution:
+      "We redesigned the site to prioritize mobile usability and implemented intuitive filtering, boosting user engagement and conversions.",
   },
 ];

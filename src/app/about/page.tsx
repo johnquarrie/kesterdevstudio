@@ -10,15 +10,13 @@ import React from "react";
 const page = () => {
   return (
     <>
-      <div>
-        <AboutHeader />
-        <Network />
-        <Services />
-        <Testimonials />
-        <Team />
-        <WhyUs />
-        <Faq />
-      </div>
+      <AboutHeader />
+      <Network />
+      <Services />
+      <Testimonials />
+      <Team />
+      <WhyUs />
+      <Faq />
     </>
   );
 };
