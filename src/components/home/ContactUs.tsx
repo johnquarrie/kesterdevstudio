@@ -15,6 +15,7 @@ import { scaleVariants } from "@/utils/motion";
 const schema = yup.object().shape({
   fullName: yup.string().required("Full name is required"),
   company: yup.string(),
+  referral: yup.string(),
   email: yup.string().email("Invalid email").required("Email is required"),
   phone: yup
     .string()
@@ -193,6 +194,19 @@ const ContactUs = () => {
                   </span>
                 )}
               </div>
+            </div>
+            <div className="w-full flex flex-col">
+              <input
+                type="referral"
+                placeholder="referral"
+                {...register("referral")}
+                className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+              />
+              {errors.referral && (
+                <span className="text-xs text-red-500">
+                  {errors.referral.message as string}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">
