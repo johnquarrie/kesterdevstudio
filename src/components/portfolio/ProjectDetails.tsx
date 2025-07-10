@@ -1,16 +1,53 @@
 "use client";
 
-import { Details } from "@/constants";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import axios from "axios";
+
+interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  category: string;
+  images: string[];
+  problem?: string;
+  solution?: string;
+}
 
 export default function ProjectDetails({ id }: { id: string }) {
   const router = useRouter();
-  const project = Details.find((p) => p.id.toString() === id);
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  if (!project) {
-    return <div className="p-8 text-white">Project not found.</div>;
-  }
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const res = await axios.get<{ data: Project }>(
+          `http://localhost:4000/uploads/${id}`
+        );
+        setProject(res.data.data);
+      } catch (err: any) {
+        console.error(err);
+        setError("❌ Failed to fetch project details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [id]);
+
+  if (loading) return <div className="p-8 text-white">Loading project...</div>;
+
+  if (error)
+    return (
+      <div className="p-8 text-red-500">{error || "Project not found."}</div>
+    );
+
+  if (!project) return <div className="p-8 text-white">Project not found.</div>;
 
   return (
     <div className="lg:p-8 p-6 mt-20 text-white">
@@ -18,28 +55,31 @@ export default function ProjectDetails({ id }: { id: string }) {
 
       <div className="mb-8 grid gap-8 lg:grid-cols-3">
         <div>
-          <ul className="text-slate-500">
-            {project.services.map((service, index) => (
-              <li key={index}>{service}</li>
-            ))}
-          </ul>
+          <h5 className="font-semibold mb-2">Category</h5>
+          <p className="text-slate-500">{project.category}</p>
+          <h5 className="font-semibold mt-4 mb-2">Tags</h5>
+          <p className="text-slate-500">{project.tags.join(", ")}</p>
         </div>
         <div>
           <h5 className="font-semibold mb-2">Problem</h5>
-          <p>{project.problem}</p>
+          <p>{project.problem || "No problem specified."}</p>
         </div>
         <div>
           <h5 className="font-semibold mb-2">Solution</h5>
-          <p>{project.solution}</p>
+          <p>{project.solution || "No solution specified."}</p>
         </div>
       </div>
 
-      <Image
-        src={project.image}
-        alt={project.title}
-        className="rounded-xl w-full mb-6"
-        quality={100}
-      />
+      {project.images[0] && (
+        <Image
+          src={project.images[0]}
+          alt={project.title}
+          width={1200}
+          height={800}
+          className="rounded-xl w-full mb-6"
+          quality={100}
+        />
+      )}
     </div>
   );
 }

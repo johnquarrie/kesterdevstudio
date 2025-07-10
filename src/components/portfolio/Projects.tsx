@@ -1,33 +1,64 @@
 "use client";
 
-import images from "@/public/images";
-import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
-import { motion, useInView } from "framer-motion";
-import Image from "next/image";
+import { useEffect, useState, useRef } from "react";
+import { useInView } from "framer-motion";
+import axios from "axios";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
-import { portfolio } from "@/constants/index";
+import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
 
 const categories = [
   "All",
-  "UI/UX Design",
-  "App Development",
-  "Game Development",
+  "UI/UX",
   "Blockchain Development",
-  "3D Design",
+  "Web Development",
+  "2D/3D design",
+  "Game Development",
+  "App Development",
 ];
+
+interface Upload {
+  _id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  category: string;
+  images: string[];
+}
 
 const Projects = () => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [projects, setProjects] = useState<Upload[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
+
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.1 });
 
-  const filteredPortfolio =
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await axios.get<{ data: Upload[] }>(
+          "http://localhost:4000/uploads"
+        );
+        setProjects(res.data.data);
+      } catch (err: any) {
+        console.error(err);
+        setError("Failed to load projects.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  const filteredProjects =
     activeCategory === "All"
-      ? portfolio
-      : portfolio.filter((item) => item.category === activeCategory);
+      ? projects
+      : projects.filter((item) => item.category === activeCategory);
 
   return (
     <motion.div
@@ -53,20 +84,20 @@ const Projects = () => {
               animate="show"
             >
               {category}
-              {activeCategory !== category && (
-                <>
-                  <span className="corner-tl"></span>
-                  <span className="corner-bl"></span>
-                </>
-              )}
             </motion.button>
           ))}
         </div>
 
-        {/* Projects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16 mt-6">
-          {filteredPortfolio.map((item, index) => (
-            <Link href={`/portfolio/${item.id}`} key={index}>
+        {/* Content */}
+        {loading ? (
+          <p className="text-center text-gray-400 mt-10">Loading projects...</p>
+        ) : error ? (
+          <p className="text-center text-red-400 mt-10">{error}</p>
+        ) : filteredProjects.length === 0 ? (
+          <p className="text-center text-gray-400 mt-10">No projects found.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16 mt-6">
+            {filteredProjects.map((item, index) => (
               <div key={index} className="flex flex-col gap-3">
                 <motion.div
                   variants={scaleVariants}
@@ -82,12 +113,11 @@ const Projects = () => {
                   ></div>
 
                   <Image
-                    src={item.image}
-                    alt={`${item.id} image`}
+                    src={item.images[0]} // Only the first image
+                    alt={`${item.title} image`}
                     fill
                     objectFit="cover"
                     className="z-0"
-                    quality={100}
                   />
 
                   {hovered === index && (
@@ -106,21 +136,17 @@ const Projects = () => {
 
                 <motion.div
                   variants={textVariant(0.1)}
-                  className="flex flex-col items-start justify-start gap-1"
+                  className="flex flex-col items-start gap-1"
                 >
-                  <p className="text-xs text-white">{item.tag}</p>
+                  <p className="text-xs text-white">{item.tags.join(", ")}</p>
                   <div className="flex items-center gap-1">
-                    <h2 className="text-[#FCFCFD] text-2xl">{item.name}</h2>
+                    <h2 className="text-[#FCFCFD] text-2xl">{item.title}</h2>
                     <GoArrowUpRight className="text-2xl text-primary" />
                   </div>
                 </motion.div>
               </div>
-            </Link>
-          ))}
-        </div>
-
-        {filteredPortfolio.length === 0 && (
-          <p className="text-gray-500 text-center mt-8">No projects found.</p>
+            ))}
+          </div>
         )}
       </div>
     </motion.div>

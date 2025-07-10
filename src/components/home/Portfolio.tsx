@@ -6,20 +6,50 @@ import { SectionWrapper } from "@/utils/hoc";
 import { fadeIn, scaleVariants, textVariant, zoomIn } from "@/utils/motion";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { HiOutlineStar, HiStar } from "react-icons/hi";
 import { AnimatedButton } from "../button";
+import axios from "axios";
+
+interface Upload {
+  _id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  category: string;
+  images: string[];
+}
 
 const Portfolio = () => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<number | null>(null);
+  const [projects, setProjects] = useState<Upload[]>([]);
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.1 });
 
   const handleOutsideClick = () => {
     setHovered(null);
   };
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await axios.get<{ data: Upload[] }>(
+          "http://localhost:4000/uploads"
+        );
+        setProjects(res.data.data);
+      } catch (err: any) {
+        console.error(err);
+        setError("Failed to load projects.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const portfolio = [
     {
@@ -87,66 +117,65 @@ const Portfolio = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-6 gap-y-16 mt-6">
-          {portfolio.map((item, index) => (
-            <div key={index} className="h-full flex flex-col gap-3">
-              <motion.div
-                variants={scaleVariants}
-                whileInView={scaleVariants.whileInView}
-                className="cursor-pointer relative w-full h-60 md:h-96 overflow-hidden shadow-lg"
-                onHoverStart={() => setHovered(index)}
-                onHoverEnd={() => {
-                  setHovered(null);
-                }}
-                onClick={() => {
-                  setHovered(index === hovered ? null : index);
-                  // navigate("/", "push");
-                }}
-              >
-                <div
-                  className={` absolute inset-0 bg-black ${
-                    hovered === index ? "opacity-80" : "opacity-0"
-                  } z-10 transition-opacity duration-300 backdrop-blur-sm`}
-                ></div>
-                <Image
-                  src={item.image}
-                  alt={`${item.id} image`}
-                  fill
-                  objectFit="cover"
-                  className="z-0"
-                  quality={100}
-                  priority
-                />
+        {loading ? (
+          <p className="text-center text-gray-400 mt-10">Loading projects...</p>
+        ) : error ? (
+          <p className="text-center text-red-400 mt-10">{error}</p>
+        ) : projects.length === 0 ? (
+          <p className="text-center text-gray-400 mt-10">No projects found.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16 mt-6">
+            {projects.map((item, index) => (
+              <div key={index} className="flex flex-col gap-3">
+                <motion.div
+                  variants={scaleVariants}
+                  whileInView={scaleVariants.whileInView}
+                  className="cursor-pointer relative w-full h-60 md:h-96 overflow-hidden shadow-lg"
+                  onHoverStart={() => setHovered(index)}
+                  onHoverEnd={() => setHovered(null)}
+                >
+                  <div
+                    className={`absolute inset-0 bg-black ${
+                      hovered === index ? "opacity-80" : "opacity-0"
+                    } z-10 transition-opacity duration-300 backdrop-blur-sm`}
+                  ></div>
 
-                {hovered === index && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute z-20 top-3 px-4 flex flex-col items-center justify-center w-full h-full"
-                  >
-                    <p className="text-white text-base text-center">
-                      {item.description}
-                    </p>
-                  </motion.div>
-                )}
-              </motion.div>
+                  <Image
+                    src={item.images[0]} // Only the first image
+                    alt={`${item.title} image`}
+                    fill
+                    objectFit="cover"
+                    className="z-0"
+                  />
 
-              <motion.div
-                variants={textVariant(0.1)}
-                className="flex flex-col items-start justify-start gap-1"
-              >
-                <p className="text-xs text-white">{item.tag}</p>
-                <div className="flex items-center gap-1">
-                  <h2 className="text-[#FCFCFD] text-2xl 2xs:text-3xl">
-                    {item.name}
-                  </h2>
-                  <GoArrowUpRight className="text-2xl 2xs:text-3xl text-primary" />{" "}
-                </div>
-              </motion.div>
-            </div>
-          ))}
-        </div>
+                  {hovered === index && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute z-20 top-3 px-4 flex flex-col items-center justify-center w-full h-full"
+                    >
+                      <p className="text-white text-base text-center">
+                        {item.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </motion.div>
+
+                <motion.div
+                  variants={textVariant(0.1)}
+                  className="flex flex-col items-start gap-1"
+                >
+                  <p className="text-xs text-white">{item.tags.join(", ")}</p>
+                  <div className="flex items-center gap-1">
+                    <h2 className="text-[#FCFCFD] text-2xl">{item.title}</h2>
+                    <GoArrowUpRight className="text-2xl text-primary" />
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        )}
 
         <AnimatedButton
           clipSize={14}
