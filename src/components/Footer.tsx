@@ -17,7 +17,7 @@ const footerLinks = [
   },
   {
     label: "Contact",
-    value: "#contactUs",
+    value: "/#contactUs",
   },
   {
     label: "Portfolio",

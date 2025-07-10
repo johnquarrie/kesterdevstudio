@@ -193,7 +193,7 @@ const Navbar: React.FC = () => {
           </div>
           <AnimatedButton
             onClick={() => {
-              navigate("#contactUs");
+              navigate("/#contactUs");
             }}
             clipSize={14}
             className="py-3 px-10 hidden lg:flex"

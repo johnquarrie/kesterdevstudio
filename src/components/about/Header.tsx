@@ -6,8 +6,10 @@ import { AnimatedButton } from "../button";
 import { motion } from "framer-motion";
 import { textVariant } from "@/utils/motion";
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
+import useNavigate from "@/hooks/useNavigate";
 
 const AboutHeader = () => {
+  const navigate = useNavigate();
   return (
     <header className="relative w-full min-h-screen h-full flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -62,7 +64,13 @@ const AboutHeader = () => {
             Building immersive digital experiences through design, code, and
             storytelling.
           </p>
-          <AnimatedButton clipSize={14} className="w-fit px-8 py-3.5 mt-4">
+          <AnimatedButton
+            onClick={() => {
+              navigate("/#contactUs");
+            }}
+            clipSize={14}
+            className="w-fit px-8 py-3.5 mt-4"
+          >
             get started
           </AnimatedButton>
         </motion.div>

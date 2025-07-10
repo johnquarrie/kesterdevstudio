@@ -43,7 +43,7 @@ const Menu = ({
       <div className="w-full mb-16 2xs:mb-20">
         <AnimatedButton
           onClick={() => {
-            navigate("#contactUs");
+            navigate("/#contactUs");
           }}
           clipSize={14}
           className="py-3 w-full"

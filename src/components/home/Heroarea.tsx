@@ -9,8 +9,10 @@ import { SectionWrapper } from "@/utils/hoc";
 import { textVariant, fadeIn } from "@/utils/motion";
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
 import { tags } from "@/constants";
+import useNavigate from "@/hooks/useNavigate";
 
 const Heroarea = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative w-full min-h-screen h-full flex items-center lg:items-end">
       <Image
@@ -40,6 +42,9 @@ const Heroarea = () => {
             </p>
           </motion.div>
           <AnimatedButton
+            onClick={() => {
+              navigate("/#contactUs");
+            }}
             clipSize={14}
             className="w-fit px-8 py-3 cursor-pointer"
           >

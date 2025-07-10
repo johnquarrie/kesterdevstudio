@@ -1,6 +1,6 @@
 "use client";
 import { SectionWrapper } from "@/utils/hoc";
-import React from "react";
+import React, { useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 import { useForm } from "react-hook-form";
@@ -11,9 +11,11 @@ import { motion } from "motion/react";
 import { AnimatedButton } from "../button";
 import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const schema = yup.object().shape({
-  fullName: yup.string().required("Full name is required"),
+  name: yup.string().required("Name is required"),
   company: yup.string(),
   referral: yup.string(),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -24,25 +26,31 @@ const schema = yup.object().shape({
     .array()
     .of(yup.string())
     .min(1, "Select at least one interest"),
-  details: yup.string().required("Project details are required"),
+  message: yup.string().required("Message is required"),
 });
 
+export type FormData = yup.InferType<typeof schema>;
+
 const ContactUs = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
     watch,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      fullName: "",
+      name: "",
       company: "",
+      referral: "",
       email: "",
       phone: "",
       interests: [],
-      details: "",
+      message: "",
     },
   });
 
@@ -62,9 +70,33 @@ const ContactUs = () => {
       setValue("interests", [...current, interest]);
     }
   };
-  const onSubmit = (data: unknown) => {
-    // handle form submission here
-    console.log(data);
+
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(
+        "https://file-uploads-server.onrender.com/contact",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        reset(); // Reset form after successful submission
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,6 +104,30 @@ const ContactUs = () => {
       id="contactUs"
       className="relative w-full h-full py-5 2xs:py-10 sm:py-20 overflow-hidden"
     >
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#1a1a1a",
+            color: "#fff",
+            border: "1px solid #6C0BDB",
+          },
+          success: {
+            iconTheme: {
+              primary: "#10B981",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#EF4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
+
       <div
         style={{
           position: "absolute",
@@ -156,12 +212,13 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="Full name"
-                  {...register("fullName")}
+                  {...register("name")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+                  disabled={isLoading}
                 />
-                {errors.fullName && (
+                {errors.name && (
                   <span className="text-xs text-red-500">
-                    {errors.fullName.message as string}
+                    {errors.name.message as string}
                   </span>
                 )}
               </div>
@@ -171,6 +228,7 @@ const ContactUs = () => {
                   placeholder="Company"
                   {...register("company")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -181,6 +239,7 @@ const ContactUs = () => {
                   placeholder="Email"
                   {...register("email")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+                  disabled={isLoading}
                 />
                 {errors.email && (
                   <span className="text-xs text-red-500">
@@ -194,6 +253,7 @@ const ContactUs = () => {
                   placeholder="phone"
                   {...register("phone")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+                  disabled={isLoading}
                 />
                 {errors.phone && (
                   <span className="text-xs text-red-500">
@@ -204,10 +264,11 @@ const ContactUs = () => {
             </div>
             <div className="w-full flex flex-col">
               <input
-                type="referral"
+                type="text"
                 placeholder="referral"
                 {...register("referral")}
                 className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+                disabled={isLoading}
               />
               {errors.referral && (
                 <span className="text-xs text-red-500">
@@ -224,13 +285,14 @@ const ContactUs = () => {
                 {tags.map((tag, index) => (
                   <motion.div
                     key={index}
-                    onClick={() => toggleInterest(tag)}
+                    onClick={() => !isLoading && toggleInterest(tag)}
                     className={classNames(
                       "uppercase cursor-pointer flex text-center px-3 2xl:px-3.5 py-2.5 2xl:py-3 text-white text-[10px] xl:text-xs",
                       {
                         "bg-primary": selectedInterests?.includes(tag),
                         "bg-white/9 border border-white/8  corner-border hover:bg-primary":
                           !selectedInterests?.includes(tag),
+                        "opacity-50 cursor-not-allowed": isLoading,
                       }
                     )}
                   >
@@ -246,20 +308,32 @@ const ContactUs = () => {
             </div>
             <div className="flex flex-col">
               <textarea
-                {...register("details")}
+                {...register("message")}
                 rows={4}
                 placeholder="Tell us more about your project!"
                 className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none resize-none"
+                disabled={isLoading}
               />
-              {errors.details && (
+              {errors.message && (
                 <span className="text-xs text-red-500">
-                  {errors.details.message as string}
+                  {errors.message.message as string}
                 </span>
               )}
             </div>
 
-            <AnimatedButton clipSize={14} className="w-full mt-8">
-              SEND
+            <AnimatedButton
+              clipSize={14}
+              className="w-full mt-8"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  SENDING...
+                </div>
+              ) : (
+                "SEND"
+              )}
             </AnimatedButton>
 
             <div className="lg:hidden flex items-center justify-center gap-2">
