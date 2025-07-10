@@ -1,6 +1,5 @@
 "use client";
 import { tags } from "@/constants";
-import images from "@/public/images";
 import { SectionWrapper } from "@/utils/hoc";
 import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
 import { motion, useInView } from "motion/react";
@@ -39,7 +38,7 @@ const Portfolio = () => {
           "https://file-uploads-server.onrender.com/uploads"
         );
         setProjects(res.data.data);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
         setError("Failed to load projects.");
       } finally {

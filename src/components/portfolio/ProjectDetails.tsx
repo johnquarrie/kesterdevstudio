@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import { useParams } from "next/navigation";
@@ -17,8 +16,8 @@ interface Project {
   solution?: string;
 }
 
-export default function ProjectDetails({ id }: { id: string }) {
-  const router = useRouter();
+export default function ProjectDetails() {
+  const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -30,7 +29,7 @@ export default function ProjectDetails({ id }: { id: string }) {
           `https://file-uploads-server.onrender.com/uploads/${id}`
         );
         setProject(res.data.data);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
         setError("❌ Failed to fetch project details.");
       } finally {

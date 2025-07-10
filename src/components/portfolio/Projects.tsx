@@ -45,7 +45,7 @@ const Projects = () => {
           "https://file-uploads-server.onrender.com/uploads"
         );
         setProjects(res.data.data);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
         setError("Failed to load projects.");
       } finally {
