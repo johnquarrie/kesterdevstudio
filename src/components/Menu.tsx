@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { TfiClose } from "react-icons/tfi";
 import { AnimatedButton } from "./button";
+import useNavigate from "@/hooks/useNavigate";
 
 const Menu = ({
   isOpen,
@@ -13,6 +14,7 @@ const Menu = ({
   isOpen: boolean;
   toggleMenu: () => void;
 }) => {
+  const navigate = useNavigate();
   return (
     <div
       className={`lg:hidden z-50 pt-10 2xs:pt-12 px-5 xs:px-6 sm:px-8 md:px-10 fixed top-0 right-0 h-full bg-black w-full transition-transform duration-300 ${
@@ -39,7 +41,13 @@ const Menu = ({
         ))}
       </div>
       <div className="w-full mb-16 2xs:mb-20">
-        <AnimatedButton clipSize={14} className="py-3 w-full">
+        <AnimatedButton
+          onClick={() => {
+            navigate("#contactUs");
+          }}
+          clipSize={14}
+          className="py-3 w-full"
+        >
           Hire us
         </AnimatedButton>
       </div>

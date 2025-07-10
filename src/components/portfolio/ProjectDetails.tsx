@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
+import { useParams } from "next/navigation";
 
 interface Project {
   _id: string;

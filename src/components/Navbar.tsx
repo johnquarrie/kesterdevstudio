@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import images from "@/public/images";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { TbMenu3 } from "react-icons/tb";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { navLinks } from "@/constants";
 import Menu from "./Menu";
+import useNavigate from "@/hooks/useNavigate";
 
 const DummyAudioVisualizer = ({ isActive = true }: { isActive?: boolean }) => {
   const [bars, setBars] = useState([
@@ -64,6 +65,7 @@ const DummyAudioVisualizer = ({ isActive = true }: { isActive?: boolean }) => {
 };
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(true);
@@ -189,7 +191,13 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
           </div>
-          <AnimatedButton clipSize={14} className="py-3 px-10 hidden lg:flex">
+          <AnimatedButton
+            onClick={() => {
+              navigate("#contactUs");
+            }}
+            clipSize={14}
+            className="py-3 px-10 hidden lg:flex"
+          >
             Hire us
           </AnimatedButton>
 

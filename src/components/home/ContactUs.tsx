@@ -3,7 +3,7 @@ import { SectionWrapper } from "@/utils/hoc";
 import React from "react";
 import { CiMail } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { socials, tags } from "@/constants";
@@ -15,6 +15,7 @@ import { scaleVariants } from "@/utils/motion";
 const schema = yup.object().shape({
   fullName: yup.string().required("Full name is required"),
   company: yup.string(),
+  referral: yup.string(),
   email: yup.string().email("Invalid email").required("Email is required"),
   phone: yup
     .string()
@@ -30,7 +31,6 @@ const ContactUs = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
     setValue,
     watch,
@@ -62,13 +62,16 @@ const ContactUs = () => {
       setValue("interests", [...current, interest]);
     }
   };
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: unknown) => {
     // handle form submission here
     console.log(data);
   };
 
   return (
-    <div className="relative w-full h-full py-5 2xs:py-10 sm:py-20 overflow-hidden">
+    <div
+      id="contactUs"
+      className="relative w-full h-full py-5 2xs:py-10 sm:py-20 overflow-hidden"
+    >
       <div
         style={{
           position: "absolute",
@@ -120,7 +123,12 @@ const ContactUs = () => {
             </motion.h1>
             <div className="flex items-center gap-1 text-[#CACDCE]">
               <CiMail />
-              <p className="underline text-xs">info@kesterdevstudio.com</p>
+              <a
+                href="mailto:info@kesterdevstudio.com"
+                className="underline text-xs"
+              >
+                info@kesterdevstudio.com
+              </a>{" "}
             </div>
           </div>
           <div className="max-lg:hidden flex items-center gap-2">
@@ -194,10 +202,23 @@ const ContactUs = () => {
                 )}
               </div>
             </div>
+            <div className="w-full flex flex-col">
+              <input
+                type="referral"
+                placeholder="referral"
+                {...register("referral")}
+                className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
+              />
+              {errors.referral && (
+                <span className="text-xs text-red-500">
+                  {errors.referral.message as string}
+                </span>
+              )}
+            </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm text-[#8E8E93]">
-                I'm Interested on
+                I&apos;m Interested on
               </label>
               <div className="flex flex-wrap gap-3">
                 {tags.map((tag, index) => (

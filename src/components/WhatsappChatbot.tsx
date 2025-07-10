@@ -2,7 +2,6 @@
 
 import React from "react";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
-import images from "../../public/images";
 
 interface WhatsAppChatbotProps {
   phoneNumber: string; // Phone number with country code (e.g., "1234567890")

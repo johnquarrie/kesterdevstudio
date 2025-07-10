@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { FaCheckCircle, FaLightbulb, FaRocket } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { reasons } from "@/constants";

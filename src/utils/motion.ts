@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export const textVariant = (delay: number) => {
   return {
     hidden: {

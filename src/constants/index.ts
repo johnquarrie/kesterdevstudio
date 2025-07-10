@@ -1,4 +1,4 @@
-import { IoLogoInstagram, IoLogoTiktok } from "react-icons/io5";
+import { IoLogoInstagram } from "react-icons/io5";
 import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { BiLogoFacebook } from "react-icons/bi";
 import images from "@/public/images";
@@ -187,29 +187,29 @@ export const tags = [
 ];
 
 export const socials = [
-  {
-    icon: IoLogoTiktok,
-    url: "#",
-  },
+  // {
+  //   icon: IoLogoTiktok,
+  //   url: "#",
+  // },
   {
     icon: IoLogoInstagram,
-    url: "#",
+    url: "https://www.instagram.com/kesterstudios",
   },
   {
     icon: FaXTwitter,
-    url: "#",
+    url: "https://x.com/kester2danim",
   },
   {
     icon: BiLogoFacebook,
-    url: "#",
+    url: "https://www.facebook.com/kesterstudios",
   },
   {
     icon: FaYoutube,
-    url: "#",
+    url: "https://youtube.com/@kesterstudio",
   },
   {
     icon: FaLinkedinIn,
-    url: "#",
+    url: "https://www.linkedin.com/company/kester-studios/",
   },
 ];
 

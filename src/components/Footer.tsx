@@ -1,12 +1,8 @@
 "use client";
+
 import images from "@/public/images";
-import { SectionWrapper } from "@/utils/hoc";
-import { motion } from "motion/react";
 import Image from "next/image";
 import React from "react";
-import { AnimatedButton } from "./button";
-import { textVariant } from "@/utils/motion";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import Link from "next/link";
 import { socials } from "@/constants";
 
@@ -21,7 +17,7 @@ const footerLinks = [
   },
   {
     label: "Contact",
-    value: "/contact",
+    value: "#contactUs",
   },
   {
     label: "Portfolio",
@@ -29,11 +25,11 @@ const footerLinks = [
   },
   {
     label: "FAQs",
-    value: "/faqs",
+    value: "/about/#faqs",
   },
   {
     label: "Testimonials",
-    value: "/testimonials",
+    value: "#testimonials",
   },
 ];
 
@@ -76,6 +72,9 @@ const Footer = () => {
           {socials.map((social, index) => (
             <social.icon
               key={index}
+              onClick={() => {
+                window.open(social.url, "_blank");
+              }}
               className="text-[#E7E9EF] text-xl cursor-pointer hover:text-primary"
             />
           ))}

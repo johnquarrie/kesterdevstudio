@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useInView } from "framer-motion";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
