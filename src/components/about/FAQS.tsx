@@ -13,7 +13,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="p-8 bg-[#0a0a0a]">
+    <section id="faqs" className="p-8 bg-[#0a0a0a]">
       <h1 className="font-future text-center text-white text-3xl py-6">FAQs</h1>
 
       <div className="max-w-6xl mx-auto flex flex-col gap-4">

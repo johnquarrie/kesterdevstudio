@@ -1,18 +1,15 @@
 "use client";
 import { tags } from "@/constants";
-import useNavigate from "@/hooks/useNavigate";
 import images from "@/public/images";
 import { SectionWrapper } from "@/utils/hoc";
-import { fadeIn, scaleVariants, textVariant, zoomIn } from "@/utils/motion";
+import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
-import { HiOutlineStar, HiStar } from "react-icons/hi";
 import { AnimatedButton } from "../button";
 
 const Portfolio = () => {
-  const navigate = useNavigate();
   const [hovered, setHovered] = useState<number | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.1 });

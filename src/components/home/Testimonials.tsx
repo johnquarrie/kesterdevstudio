@@ -47,7 +47,7 @@ const Testimonials = () => {
     },
   ];
   return (
-    <div className="w-full py-5 2xs:py-10 sm:py-20">
+    <div id="testimonials" className="w-full py-5 2xs:py-10 sm:py-20">
       <div className="container w-full lg:w-[90%] 2xl:w-[85%] flex flex-col justify-center items-center gap-6">
         <motion.div
           variants={textVariant(0.05)}

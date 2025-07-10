@@ -1,11 +1,13 @@
 "use client";
 
 import { Details } from "@/constants";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-export default function ProjectDetails({ id }: { id: string }) {
-  const router = useRouter();
+export default function ProjectDetails() {
+  const { id } = useParams<{
+    id: string;
+  }>();
   const project = Details.find((p) => p.id.toString() === id);
 
   if (!project) {

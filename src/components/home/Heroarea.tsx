@@ -7,12 +7,10 @@ import { AnimatedButton } from "../button";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/utils/hoc";
 import { textVariant, fadeIn } from "@/utils/motion";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
 import { tags } from "@/constants";
 
 const Heroarea = () => {
-  const { width } = useWindowSize();
   return (
     <div className="relative w-full min-h-screen h-full flex items-center lg:items-end">
       <Image
@@ -37,8 +35,8 @@ const Heroarea = () => {
             </h1>
             <p className="text-sm 2xs:text-base text-white/50 w-[90%] lg:w-[80%] xl:w-[70%]">
               From games to apps, web to blockchain, AI, 2D and 3D animation. We
-              blend creativity and code to bring bold ideas to life. If it's
-              digital, we build it.
+              blend creativity and code to bring bold ideas to life. If
+              it&apos;s digital, we build it.
             </p>
           </motion.div>
           <AnimatedButton

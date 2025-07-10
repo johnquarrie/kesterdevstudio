@@ -11,7 +11,7 @@ const Team = () => {
         Our Team
       </h1>
       <p className="text-sm 2xs:text-base text-center text-white/50 w-[90%] mb-6 lg:w-[50%] xl:w-[50%]">
-        We're a vibrant and versatile bunch here at Kester Dev Studio, a
+        We&apos;re a vibrant and versatile bunch here at Kester Dev Studio, a
         collective of creative minds passionate about bringing digital visions
         to life.
       </p>

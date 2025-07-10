@@ -1,6 +1,5 @@
 "use client";
 
-import images from "@/public/images";
 import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";

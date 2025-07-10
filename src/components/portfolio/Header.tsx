@@ -6,7 +6,7 @@ const ProjectsHeader = () => {
       <h1 className="text-3xl mb-3 font-future">Portfolio</h1>
       <p className="text-lg font-semibold lg:w-[90%]">
         At Kester Dev Studio, every project is more than just code and design,
-        it's a solution, a story, and a step forward. We collaborate with
+        it&apos;s a solution, a story, and a step forward. We collaborate with
         startups, businesses, and visionaries to bring bold ideas to life
         through clean design, smart development, and purposeful user experience.
       </p>

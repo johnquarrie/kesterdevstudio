@@ -1,6 +1,5 @@
 "use client";
 
-import images from "@/public/images";
 import Image from "next/image";
 import React from "react";
 import { AnimatedButton } from "../button";

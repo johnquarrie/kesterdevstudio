@@ -3,11 +3,9 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loading";
-import { useWindowSize } from "@/hooks/useWindowSize";
 
 const Earth = ({ scale }: { scale: number }) => {
   const earth = useGLTF("/other-models/planet/scene.gltf");
-  const { width } = useWindowSize();
 
   return (
     <primitive
