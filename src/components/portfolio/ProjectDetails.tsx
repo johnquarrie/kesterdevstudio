@@ -27,7 +27,7 @@ export default function ProjectDetails({ id }: { id: string }) {
     const fetchProject = async () => {
       try {
         const res = await axios.get<{ data: Project }>(
-          `http://localhost:4000/uploads/${id}`
+          `https://file-uploads-server.onrender.com/uploads/${id}`
         );
         setProject(res.data.data);
       } catch (err: any) {
@@ -74,6 +74,36 @@ export default function ProjectDetails({ id }: { id: string }) {
       {project.images[0] && (
         <Image
           src={project.images[0]}
+          alt={project.title}
+          width={1200}
+          height={800}
+          className="rounded-xl w-full mb-6"
+          quality={100}
+        />
+      )}
+      {project?.images && project.images.length > 1 && (
+        <Image
+          src={project.images[1]}
+          alt={project.title}
+          width={1200}
+          height={800}
+          className="rounded-xl w-full mb-6"
+          quality={100}
+        />
+      )}
+      {project?.images && project.images.length > 1 && (
+        <Image
+          src={project.images[2]}
+          alt={project.title}
+          width={1200}
+          height={800}
+          className="rounded-xl w-full mb-6"
+          quality={100}
+        />
+      )}
+      {project?.images && project.images.length > 1 && (
+        <Image
+          src={project.images[3]}
           alt={project.title}
           width={1200}
           height={800}

@@ -35,7 +35,7 @@ const Portfolio = () => {
     const fetchProjects = async () => {
       try {
         const res = await axios.get<{ data: Upload[] }>(
-          "http://localhost:4000/uploads"
+          "https://file-uploads-server.onrender.com/uploads"
         );
         setProjects(res.data.data);
       } catch (err: any) {
@@ -48,36 +48,6 @@ const Portfolio = () => {
     fetchProjects();
   }, []);
 
-  const portfolio = [
-    {
-      id: 1,
-      image: images.portfolio.port3,
-      tag: "UI/UX / DEVELOPMENT / 3D",
-      name: "Example Project",
-      description: "A platform design about a shopping website",
-    },
-    {
-      id: 2,
-      image: images.portfolio.port6,
-      tag: "UI/UX / DEVELOPMENT ",
-      name: "Web3.Future",
-      description: "A platform design about a shopping website",
-    },
-    {
-      id: 3,
-      image: images.portfolio.port5,
-      tag: "UI/UX / DEVELOPMENT ",
-      name: "Example Project",
-      description: "A platform design about a shopping website",
-    },
-    {
-      id: 4,
-      image: images.portfolio.port4,
-      tag: "UI/UX / DEVELOPMENT ",
-      name: "Example Project",
-      description: "A platform design about a shopping website",
-    },
-  ];
   return (
     <motion.div
       ref={ref}
@@ -138,7 +108,7 @@ const Portfolio = () => {
                   ></div>
 
                   <Image
-                    src={item.images[0]} // Only the first image
+                    src={item.images[0]}
                     alt={`${item.title} image`}
                     fill
                     objectFit="cover"

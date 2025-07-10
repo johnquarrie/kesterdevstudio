@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
 import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
@@ -41,7 +40,7 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const res = await axios.get<{ data: Upload[] }>(
-          "http://localhost:4000/uploads"
+          "https://file-uploads-server.onrender.com/uploads"
         );
         setProjects(res.data.data);
       } catch (err: any) {
@@ -112,7 +111,7 @@ const Projects = () => {
                   ></div>
 
                   <Image
-                    src={item.images[0]} // Only the first image
+                    src={item.images[0]}
                     alt={`${item.title} image`}
                     fill
                     objectFit="cover"

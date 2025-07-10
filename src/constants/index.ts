@@ -97,18 +97,18 @@ export const team = [
   {
     name: "Kester",
     role: "CTO",
-    image: "/images/tabpanel.png",
+    image: "/images/kester.jpg",
   },
-  { name: "Gaga", role: "Senior Product Designer", image: "/images/mark.jpg" },
+  { name: "Gaga", role: "Senior Product Designer", image: "/images/gaga.jpg" },
   {
     name: "Opia",
     role: "Senior Fullstack Developer",
-    image: "/images/emily.jpg",
+    image: "/images/opia.jpg",
   },
   {
     name: "Meshack",
     role: "Senior Blockchain Developer",
-    image: "/images/daniel.jpg",
+    image: "/images/meshack.jpg",
   },
 ];
 
