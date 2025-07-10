@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { AnimatedButton } from "../button";
 import axios from "axios";
+import Link from "next/link";
 
 interface Upload {
   _id: string;
@@ -92,7 +93,7 @@ const Portfolio = () => {
           <p className="text-center text-gray-400 mt-10">No projects found.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16 mt-6">
-            {projects.map((item, index) => (
+            {projects.slice(0, 6).map((item, index) => (
               <div key={index} className="flex flex-col gap-3">
                 <motion.div
                   variants={scaleVariants}
@@ -144,12 +145,12 @@ const Portfolio = () => {
           </div>
         )}
 
-        <AnimatedButton
-          clipSize={14}
+        <Link
+          href="/portfolio"
           className="w-fit px-8 py-3 cursor-pointer flex self-center mt-8"
         >
-          view all portfolio{" "}
-        </AnimatedButton>
+          <AnimatedButton clipSize={14}>view all portfolio </AnimatedButton>
+        </Link>
       </div>
     </motion.div>
   );
