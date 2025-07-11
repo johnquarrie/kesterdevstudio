@@ -13,13 +13,11 @@ interface Project {
   solution?: string;
 }
 
-// Generate static params for all portfolio items
 export async function generateStaticParams() {
   try {
     const res = await fetch("https://file-uploads-server.onrender.com/uploads");
     const response = await res.json();
 
-    // The API returns { data: Upload[] } structure
     const projects = response.data;
 
     if (!Array.isArray(projects)) {
@@ -36,7 +34,6 @@ export async function generateStaticParams() {
   }
 }
 
-// Fetch project data at build time
 async function getProject(id: string): Promise<Project | null> {
   try {
     const res = await fetch(

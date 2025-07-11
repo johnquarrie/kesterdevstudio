@@ -7,6 +7,7 @@ import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
 import { fadeIn, scaleVariants, textVariant } from "@/utils/motion";
 import { AnimatedButton } from "../button";
+import Link from "next/link";
 
 const categories = [
   "All",
@@ -102,7 +103,11 @@ const Projects = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16 mt-6">
               {visibleProjects.map((item, index) => (
-                <div key={item._id} className="flex flex-col gap-3">
+                <Link
+                  key={item._id}
+                  href={`/portfolio/${item._id}`}
+                  className="flex flex-col gap-3"
+                >
                   <motion.div
                     variants={scaleVariants}
                     whileInView={scaleVariants.whileInView}
@@ -148,7 +153,7 @@ const Projects = () => {
                       <GoArrowUpRight className="text-2xl text-primary" />
                     </div>
                   </motion.div>
-                </div>
+                </Link>
               ))}
             </div>
 
