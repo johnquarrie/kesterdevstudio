@@ -100,7 +100,7 @@ export const team = [
     image: "/images/crew/kester.jpg",
   },
   {
-    name: "Gaga",
+    name: "Gaga Esieboma",
     role: "Senior Product Designer",
     image: "/images/crew/gaga.jpg",
   },
@@ -120,7 +120,7 @@ export const team = [
     image: "/images/crew/dani.jpg",
   },
   {
-    name: "Kimson",
+    name: "Kimson Osaghae",
     role: "3D Artist and Animator",
     image: "/images/crew/kimson.jpg",
   },

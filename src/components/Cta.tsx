@@ -7,10 +7,17 @@ import React from "react";
 import { AnimatedButton } from "./button";
 import { textVariant } from "@/utils/motion";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { useRouter } from "next/navigation";
 
 const Cta = () => {
   const { width } = useWindowSize();
   const clipSize = width > 640 ? 40 : 20;
+  const router = useRouter();
+
+  const handleClick = () => {
+    sessionStorage.setItem("scrollToContactUs", "true");
+    router.push("/#contactUs");
+  };
   return (
     <div className=" w-full h-full py-5 2xs:py-10 sm:py-20">
       <div
@@ -45,8 +52,9 @@ const Cta = () => {
           <AnimatedButton
             clipSize={14}
             className="w-fit px-8 py-3 cursor-pointer mt-3"
+            onClick={handleClick}
           >
-            work with us{" "}
+            work with us
           </AnimatedButton>
         </div>
       </div>
