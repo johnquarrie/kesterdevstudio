@@ -34,7 +34,7 @@ const Projects = () => {
   const [projects, setProjects] = useState<Upload[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.1 });

@@ -97,18 +97,32 @@ export const team = [
   {
     name: "Kester",
     role: "CTO",
-    image: "/images/kester.jpg",
+    image: "/images/crew/kester.jpg",
   },
-  { name: "Gaga", role: "Senior Product Designer", image: "/images/gaga.jpg" },
   {
-    name: "Opia",
+    name: "Gaga",
+    role: "Senior Product Designer",
+    image: "/images/crew/gaga.jpg",
+  },
+  {
+    name: "Opia Precious",
     role: "Senior Fullstack Developer",
-    image: "/images/opia.jpg",
+    image: "/images/crew/opia.jpg",
   },
   {
-    name: "Meshack",
+    name: "Ibadin Meshack",
     role: "Senior Blockchain Developer",
-    image: "/images/meshack.jpg",
+    image: "/images/crew/meshack.jpg",
+  },
+  {
+    name: "Daniel Onyemachi",
+    role: "2D Artist and Animator",
+    image: "/images/crew/dani.jpg",
+  },
+  {
+    name: "Kimson",
+    role: "3D Artist and Animator",
+    image: "/images/crew/kimson.jpg",
   },
 ];
 
