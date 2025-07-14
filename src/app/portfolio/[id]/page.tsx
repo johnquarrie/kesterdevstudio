@@ -1,6 +1,7 @@
 // app/portfolio/[id]/page.tsx
-
 import Image from "next/image";
+
+export const dynamic = "force-dynamic";
 
 interface Project {
   _id: string;
@@ -13,31 +14,11 @@ interface Project {
   solution?: string;
 }
 
-export async function generateStaticParams() {
-  try {
-    const res = await fetch("https://file-uploads-server.onrender.com/uploads");
-    const response = await res.json();
-
-    const projects = response.data;
-
-    if (!Array.isArray(projects)) {
-      console.error("Expected projects array but got:", typeof projects);
-      return [];
-    }
-
-    return projects.map((project: Project) => ({
-      id: project._id,
-    }));
-  } catch (error) {
-    console.error("Error fetching projects for static generation:", error);
-    return [];
-  }
-}
-
 async function getProject(id: string): Promise<Project | null> {
   try {
     const res = await fetch(
-      `https://file-uploads-server.onrender.com/uploads/${id}`
+      `https://file-uploads-server.onrender.com/uploads/${id}`,
+      { cache: "no-store" }
     );
     const data = await res.json();
     return data.data;
@@ -47,13 +28,8 @@ async function getProject(id: string): Promise<Project | null> {
   }
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const project = await getProject(id);
+export default async function Page({ params }: { params: { id: string } }) {
+  const project = await getProject(params.id);
 
   if (!project) {
     return <div className="p-8 text-white">Project not found.</div>;
