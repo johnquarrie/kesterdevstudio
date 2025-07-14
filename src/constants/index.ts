@@ -97,7 +97,7 @@ export const team = [
   {
     name: "Kester",
     role: "CTO",
-    image: "/images/crew/kester.jpg",
+    image: "/images/crew/kester.png",
   },
   {
     name: "Gaga Esieboma",
