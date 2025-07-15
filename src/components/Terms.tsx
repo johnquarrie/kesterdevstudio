@@ -20,7 +20,7 @@ const Terms: React.FC<Props> = ({ showTerms, setShowTerms }) => {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-[#1A1A1A] max-w-2xl w-full max-h-[90vh] p-6 overflow-y-auto rounded-xl shadow-lg text-[#C6C6C6] relative"
+            className="bg-[#1A1A1A] max-w-2xl w-full max-h-[80vh] p-6 overflow-y-auto rounded-xl shadow-lg text-[#C6C6C6] relative"
             onClick={(e) => e.stopPropagation()}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
