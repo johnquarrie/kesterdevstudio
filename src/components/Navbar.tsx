@@ -73,15 +73,6 @@ const Navbar: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState<boolean>(false);
   const prevScrollPosRef = useRef<number>(0);
 
-  // For debugging
-  useEffect(() => {
-    console.log("Mobile nav isOpen state:", isOpen);
-  }, [isOpen]);
-
-  useEffect(() => {
-    console.log("isScrolled state changed:", isScrolled);
-  }, [isScrolled]);
-
   useEffect(() => {
     // Set initial scroll position when component mounts
     prevScrollPosRef.current = window.scrollY;
@@ -102,14 +93,6 @@ const Navbar: React.FC = () => {
 
       // Separate logic for backdrop blur - apply when not at the very top
       setIsScrolled(currentScrollPos > 0);
-
-      // Debug logging
-      console.log(
-        "Scroll position:",
-        currentScrollPos,
-        "isScrolled:",
-        currentScrollPos > 0
-      );
 
       // Update previous scroll position using ref
       prevScrollPosRef.current = currentScrollPos;
@@ -146,8 +129,6 @@ const Navbar: React.FC = () => {
   const isActive = (href: string) => {
     return pathname.toString() === href.toString();
   };
-
-  console.log(pathname);
 
   return (
     <>
