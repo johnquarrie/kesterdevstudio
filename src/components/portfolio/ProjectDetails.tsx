@@ -70,46 +70,17 @@ export default function ProjectDetails() {
         </div>
       </div>
 
-      {project.images[0] && (
+      {project.images.map((image, index) => (
         <Image
-          src={project.images[0]}
-          alt={project.title}
+          key={index}
+          src={image}
+          alt={`${project.title} - Image ${index + 1}`}
           width={1200}
           height={800}
           className="rounded-xl w-full mb-6"
           quality={100}
         />
-      )}
-      {project?.images && project.images.length > 1 && (
-        <Image
-          src={project.images[1]}
-          alt={project.title}
-          width={1200}
-          height={800}
-          className="rounded-xl w-full mb-6"
-          quality={100}
-        />
-      )}
-      {project?.images && project.images.length > 1 && (
-        <Image
-          src={project.images[2]}
-          alt={project.title}
-          width={1200}
-          height={800}
-          className="rounded-xl w-full mb-6"
-          quality={100}
-        />
-      )}
-      {project?.images && project.images.length > 1 && (
-        <Image
-          src={project.images[3]}
-          alt={project.title}
-          width={1200}
-          height={800}
-          className="rounded-xl w-full mb-6"
-          quality={100}
-        />
-      )}
+      ))}
     </div>
   );
 }
