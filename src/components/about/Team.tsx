@@ -28,7 +28,7 @@ const Team = () => {
     }
   });
 
-  const duplicatedTeam = [...team, ...team];
+  const duplicatedTeam = [...team, ...team, ...team, ...team];
 
   return (
     <section className="lg:p-8 flex flex-col items-center bg-[#0a0a0a] overflow-hidden">
@@ -51,7 +51,7 @@ const Team = () => {
           {duplicatedTeam.map((member, index) => (
             <div
               key={index}
-              className="relative group rounded-2xl overflow-hidden shadow-lg cursor-pointer min-w-[250px] h-[400px] flex-shrink-0"
+              className="relative group rounded-2xl overflow-hidden shadow-lg cursor-pointer w-[250px] h-[400px] flex-shrink-0"
             >
               <Image
                 src={member.image}
