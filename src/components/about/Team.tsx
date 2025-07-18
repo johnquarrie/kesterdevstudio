@@ -28,7 +28,7 @@ const Team = () => {
     }
   });
 
-  const duplicatedTeam = [...team, ...team, ...team, ...team];
+  const duplicatedTeam = [...team, ...team, ...team, ...team, ...team, ...team];
 
   return (
     <section className="lg:p-8 flex flex-col items-center bg-[#0a0a0a] overflow-hidden">
