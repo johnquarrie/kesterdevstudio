@@ -17,6 +17,30 @@ export const metadata: Metadata = {
   title: "Kester Dev Studio",
   description:
     "Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses.",
+  openGraph: {
+    title: "Kester Dev Studio",
+    description:
+      "Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses.",
+    url: "https://www.kesterdevstudio.com",
+    siteName: "Kester Dev Studio",
+    images: [
+      {
+        url: "https://www.kesterdevstudio.com/kester-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Kester Dev Studio Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kester Dev Studio",
+    description:
+      "Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses.",
+    images: ["https://www.kesterdevstudio.com/kester-logo.png"],
+  },
 };
 
 export default function RootLayout({
