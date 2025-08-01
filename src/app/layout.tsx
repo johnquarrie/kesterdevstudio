@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Kester Dev Studio",
     images: [
       {
-        url: "https://www.kesterdevstudio.com/kester-logo.png",
+        url: "https://www.kesterdevstudio.com/kester-logo.png?v=3",
         width: 1200,
         height: 630,
         alt: "Kester Dev Studio Logo",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Kester Dev Studio",
     description:
       "Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses.",
-    images: ["https://www.kesterdevstudio.com/kester-logo.png"],
+    images: ["https://www.kesterdevstudio.com/kester-logo.png?v=3"],
   },
 };
 
