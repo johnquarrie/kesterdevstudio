@@ -26,7 +26,7 @@ export default function ProjectDetails() {
     const fetchProject = async () => {
       try {
         const res = await axios.get<{ data: Project }>(
-          `https://shimmering-curiosity-production.up.railway.app/${id}`
+          `https://file-uploads-server.onrender.com/${id}`
         );
         setProject(res.data.data);
       } catch (err: unknown) {
