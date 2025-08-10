@@ -43,7 +43,7 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const res = await axios.get<{ data: Upload[] }>(
-          "https://file-uploads-server.onrender.com/uploads"
+          "https://shimmering-curiosity-production.up.railway.app/uploads"
         );
         setProjects(res.data.data);
       } catch (err: unknown) {
