@@ -76,7 +76,7 @@ const ContactUs = () => {
 
     try {
       const response = await axios.post(
-        "https://file-uploads-server.onrender.com/contact",
+        "https://kesterwebsiteupload-production.up.railway.app/contact",
         data,
         {
           headers: {
