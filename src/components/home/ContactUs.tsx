@@ -11,7 +11,7 @@ import { motion } from "motion/react";
 import { AnimatedButton } from "../button";
 import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
-import axios from "axios";
+import axios, { toFormData } from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 
@@ -72,33 +72,32 @@ const ContactUs = () => {
     }
   };
 
-  const onSubmit = async (data: FormData) => {
-    setIsLoading(true);
+  const onSubmit = (data: FormData) => {
+  const subject = encodeURIComponent("Message for you from Gmail");
+  const body = encodeURIComponent(
+    `Hello Kester Dev Studio,
 
-    try {
-      const response = await axios.post(
-        "https://kesterwebsiteupload-1.onrender.com/contact",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+You have a new message from your website contact form:
 
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Message sent successfully! We'll get back to you soon.");
-        reset(); // Reset form after successful submission
-      } else {
-        toast.error("Failed to send message. Please try again.");
-      }
-    } catch (error) {
-      console.error("Contact form error:", error);
-      toast.error("Failed to send message. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+👤 Name: ${data.name}
+🏢 Company: ${data.company || "N/A"}
+📧 Email: ${data.email}
+📞 Phone: ${data.phone || "N/A"}
+🎯 Interests: ${data.interests.join(", ")}  
+💬 Message:
+${data.message}
+
+Referral: ${data.referral || "N/A"}
+
+Best regards,
+${data.name}`
+  );
+
+  // open user's default mail app
+  const mailtoLink = `mailto:info@kesterdevstudio.com?subject=${subject}&body=${body}`;
+  window.location.href = mailtoLink;
+};
+
  
 
   return (
@@ -309,6 +308,7 @@ const ContactUs = () => {
               )}
             </div>
             <div className="flex flex-col">
+            {/* <p>{data}</p> */}
               <textarea
                 {...register("message")}
                 rows={4}
