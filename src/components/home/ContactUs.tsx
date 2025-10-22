@@ -308,7 +308,7 @@ ${data.name}`
               )}
             </div>
             <div className="flex flex-col">
-            {/* <p>{data}</p> */}
+              
               <textarea
                 {...register("message")}
                 rows={4}
@@ -316,6 +316,10 @@ ${data.name}`
                 className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none resize-none"
                 disabled={isLoading}
               />
+              <br/>
+              <label className="text-sm text-[#8E8E93]">
+               Or Reachout directly via info@kesterdevstudio.com
+              </label>
               {errors.message && (
                 <span className="text-xs text-red-500">
                   {errors.message.message as string}
