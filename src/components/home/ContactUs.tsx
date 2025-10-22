@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { socials, tags } from "@/constants";
 import { motion } from "motion/react";
-// import { AnimatedButton } from "../button";
+import { AnimatedButton } from "../button";
 import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
 // import axios, { toFormData } from "axios";
@@ -327,20 +327,14 @@ ${data.name}`
               )}
             </div>
 
-            {/* <AnimatedButton
+            <AnimatedButton
               clipSize={14}
               className="w-full mt-8"
               // disabled={isLoading}
             >
-              {isLoading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  SENDING...
-                </div>
-              ) : (
-                "SEND"
-              )}
-            </AnimatedButton> */}
+              
+               SEND
+            </AnimatedButton>
 
             <div className="lg:hidden flex items-center justify-center gap-2">
               {socials.map((social, index) => (
