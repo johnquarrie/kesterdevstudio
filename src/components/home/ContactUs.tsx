@@ -11,8 +11,8 @@ import { motion } from "motion/react";
 import { AnimatedButton } from "../button";
 import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
-import axios, { toFormData } from "axios";
-import toast, { Toaster } from "react-hot-toast";
+// import axios, { toFormData } from "axios";
+// import toast, { Toaster } from "react-hot-toast";
 
 
 const schema = yup.object().shape({
@@ -33,7 +33,7 @@ const schema = yup.object().shape({
 export type FormData = yup.InferType<typeof schema>;
 
 const ContactUs = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -105,7 +105,7 @@ ${data.name}`
       id="contactUs"
       className="relative w-full h-full py-5 2xs:py-10 sm:py-20 overflow-hidden"
     >
-      <Toaster
+      {/* <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -127,7 +127,7 @@ ${data.name}`
             },
           },
         }}
-      />
+      /> */}
 
       <div
         style={{
@@ -215,7 +215,7 @@ ${data.name}`
                   placeholder="Full name"
                   {...register("name")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
-                  disabled={isLoading}
+                  // disabled={isLoading}
                 />
                 {errors.name && (
                   <span className="text-xs text-red-500">
@@ -229,7 +229,7 @@ ${data.name}`
                   placeholder="Company"
                   {...register("company")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
-                  disabled={isLoading}
+                  // disabled={isLoading}
                 />
               </div>
             </div>
@@ -240,7 +240,7 @@ ${data.name}`
                   placeholder="Email"
                   {...register("email")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
-                  disabled={isLoading}
+                  // disabled={isLoading}
                 />
                 {errors.email && (
                   <span className="text-xs text-red-500">
@@ -254,7 +254,7 @@ ${data.name}`
                   placeholder="phone"
                   {...register("phone")}
                   className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
-                  disabled={isLoading}
+                  // disabled={isLoading}
                 />
                 {errors.phone && (
                   <span className="text-xs text-red-500">
@@ -269,7 +269,7 @@ ${data.name}`
                 placeholder="referral"
                 {...register("referral")}
                 className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none"
-                disabled={isLoading}
+                // disabled={isLoading}
               />
               {errors.referral && (
                 <span className="text-xs text-red-500">
@@ -286,14 +286,14 @@ ${data.name}`
                 {tags.map((tag, index) => (
                   <motion.div
                     key={index}
-                    onClick={() => !isLoading && toggleInterest(tag)}
+                    // onClick={() => !isLoading && toggleInterest(tag)}
                     className={classNames(
                       "uppercase cursor-pointer flex text-center px-3 2xl:px-3.5 py-2.5 2xl:py-3 text-white text-[10px] xl:text-xs",
                       {
                         "bg-primary": selectedInterests?.includes(tag),
                         "bg-white/9 border border-white/8  corner-border hover:bg-primary":
                           !selectedInterests?.includes(tag),
-                        "opacity-50 cursor-not-allowed": isLoading,
+                        // "opacity-50 cursor-not-allowed": isLoading,
                       }
                     )}
                   >
@@ -314,7 +314,7 @@ ${data.name}`
                 rows={4}
                 placeholder="Tell us more about your project!"
                 className="bg-transparent placeholder:text-[#8E8E93] placeholder:text-sm border-b border-[#8E8E93] text-white py-2.5 px-1 outline-none resize-none"
-                disabled={isLoading}
+                // disabled={isLoading}
               />
               <br/>
               <label className="text-sm text-[#8E8E93]">
@@ -327,10 +327,10 @@ ${data.name}`
               )}
             </div>
 
-            <AnimatedButton
+            {/* <AnimatedButton
               clipSize={14}
               className="w-full mt-8"
-              disabled={isLoading}
+              // disabled={isLoading}
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -340,7 +340,7 @@ ${data.name}`
               ) : (
                 "SEND"
               )}
-            </AnimatedButton>
+            </AnimatedButton> */}
 
             <div className="lg:hidden flex items-center justify-center gap-2">
               {socials.map((social, index) => (
