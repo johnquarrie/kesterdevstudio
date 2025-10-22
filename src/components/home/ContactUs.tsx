@@ -1,6 +1,6 @@
 "use client";
 import { SectionWrapper } from "@/utils/hoc";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 import { useForm } from "react-hook-form";
@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { socials, tags } from "@/constants";
 import { motion } from "motion/react";
-import { AnimatedButton } from "../button";
+// import { AnimatedButton } from "../button";
 import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
 // import axios, { toFormData } from "axios";
@@ -41,7 +41,7 @@ const ContactUs = () => {
     formState: { errors },
     setValue,
     watch,
-    reset,
+    // reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -57,20 +57,20 @@ const ContactUs = () => {
 
   const selectedInterests = watch("interests");
 
-  const toggleInterest = (interest: string) => {
-    const current = selectedInterests || [];
+  // const toggleInterest = (interest: string) => {
+  //   const current = selectedInterests || [];
 
-    if (current.includes(interest)) {
-      // Remove interest if it's already selected
-      setValue(
-        "interests",
-        current.filter((i) => i !== interest)
-      );
-    } else {
-      // Add interest if it's not selected
-      setValue("interests", [...current, interest]);
-    }
-  };
+  //   if (current.includes(interest)) {
+  //     // Remove interest if it's already selected
+  //     setValue(
+  //       "interests",
+  //       current.filter((i) => i !== interest)
+  //     );
+  //   } else {
+  //     // Add interest if it's not selected
+  //     setValue("interests", [...current, interest]);
+  //   }
+  // };
 
   const onSubmit = (data: FormData) => {
   const subject = encodeURIComponent("Message for you from Gmail");
