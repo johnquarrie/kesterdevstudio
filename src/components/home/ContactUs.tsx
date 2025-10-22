@@ -13,7 +13,6 @@ import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Resend } from "resend";
 
 
 const schema = yup.object().shape({
