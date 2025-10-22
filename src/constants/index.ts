@@ -95,33 +95,33 @@ export const testimonials = [
 
 export const team = [
   {
-    name: "Kester",
-    role: "CTO",
+    name: "Kester Adeyelu",
+    role: "CTO, 3D Expert & Dev",
     image: "/images/crew/kester.png",
   },
   {
-    name: "Gaga Esieboma",
-    role: "Senior Product Designer",
-    image: "/images/crew/gaga.jpg",
+    name: "Olajitan Iretomiwa",
+    role: "Product Designer/ Wordpress Designer",
+    image: "/images/crew/tommy.jpg",
+  },
+  // {
+  //   name: "Opia Precious",
+  //   role: "Senior Fullstack Developer",
+  //   image: "/images/crew/opia.jpg",
+  // },
+  {
+    name: "John Quarrie",
+    role: "Senior Full Stack Blockchain Developer",
+    image: "/images/crew/john.jpg",
   },
   {
-    name: "Opia Precious",
-    role: "Senior Fullstack Developer",
-    image: "/images/crew/opia.jpg",
-  },
-  {
-    name: "Ibadin Meshack",
-    role: "Senior Blockchain Developer",
-    image: "/images/crew/meshack.jpg",
-  },
-  {
-    name: "Daniel Onyemachi",
+    name: "Ibironke Marvelous",
     role: "2D Artist and Animator",
-    image: "/images/crew/dani.jpg",
+    image: "/images/crew/marv.jpg",
   },
   {
     name: "Kimson Osaghae",
-    role: "3D Artist and Animator",
+    role: "Lead 2D Generalist",
     image: "/images/crew/kimson.jpg",
   },
 ];
@@ -221,10 +221,10 @@ export const socials = [
     icon: FaYoutube,
     url: "https://youtube.com/@kesterstudio",
   },
-  {
-    icon: FaLinkedinIn,
-    url: "https://www.linkedin.com/company/kester-studios/",
-  },
+  // {
+  //   icon: FaLinkedinIn,
+  //   url: "https://www.linkedin.com/company/kester-studios/",
+  // },
 ];
 
 export const portfolio = [

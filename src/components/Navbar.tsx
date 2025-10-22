@@ -15,9 +15,11 @@ import Menu from "./Menu";
 import useNavigate from "@/hooks/useNavigate";
 
 const DummyAudioVisualizer = ({ isActive = true }: { isActive?: boolean }) => {
-  const [bars, setBars] = useState([
-    2, 4, 3, 6, 5, 2, 1, 4, 2, 5, 6, 8, 6, 2, 4,
-  ]);
+  const [bars, setBars] = useState<number[]>([]);
+  useEffect(() => {
+    setBars([2, 4, 3, 6, 5, 2, 1, 4, 2, 5, 6, 8, 6, 2, 4]); // set only on client
+  }, []);
+
   const { width } = useWindowSize();
 
   useEffect(() => {

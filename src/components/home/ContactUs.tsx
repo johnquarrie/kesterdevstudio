@@ -13,6 +13,8 @@ import classNames from "classnames";
 import { scaleVariants } from "@/utils/motion";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { Resend } from "resend";
+
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -76,7 +78,7 @@ const ContactUs = () => {
 
     try {
       const response = await axios.post(
-        "https://kesterwebsiteupload-production.up.railway.app/contact",
+        "https://kesterwebsiteupload-1.onrender.com/contact",
         data,
         {
           headers: {
@@ -98,6 +100,7 @@ const ContactUs = () => {
       setIsLoading(false);
     }
   };
+ 
 
   return (
     <div
