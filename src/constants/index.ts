@@ -1,5 +1,6 @@
 import { IoLogoInstagram } from "react-icons/io5";
-import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FaXTwitter, FaYoutube } from "react-icons/fa6";
+// import { FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { BiLogoFacebook } from "react-icons/bi";
 import images from "@/public/images";
 
