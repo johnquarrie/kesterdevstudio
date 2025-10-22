@@ -39,7 +39,7 @@ const ContactUs = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    // setValue,
     watch,
     // reset,
   } = useForm({
