@@ -83,7 +83,7 @@ You have a new message from your website contact form:
 🏢 Company: ${data.company || "N/A"}
 📧 Email: ${data.email}
 📞 Phone: ${data.phone || "N/A"}
-🎯 Interests: ${data.interests.join(", ")}  
+🎯 Interests: ${(data.interests || []).join(", ")}
 💬 Message:
 ${data.message}
 
