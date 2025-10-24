@@ -39,7 +39,7 @@ const ContactUs = () => {
     register,
     handleSubmit,
     formState: { errors },
-    // setValue,
+    setValue,
     watch,
     // reset,
   } = useForm({
@@ -57,20 +57,20 @@ const ContactUs = () => {
 
   const selectedInterests = watch("interests");
 
-  // const toggleInterest = (interest: string) => {
-  //   const current = selectedInterests || [];
+  const toggleInterest = (interest: string) => {
+    const current = selectedInterests || [];
 
-  //   if (current.includes(interest)) {
-  //     // Remove interest if it's already selected
-  //     setValue(
-  //       "interests",
-  //       current.filter((i) => i !== interest)
-  //     );
-  //   } else {
-  //     // Add interest if it's not selected
-  //     setValue("interests", [...current, interest]);
-  //   }
-  // };
+    if (current.includes(interest)) {
+      // Remove interest if it's already selected
+      setValue(
+        "interests",
+        current.filter((i) => i !== interest)
+      );
+    } else {
+      // Add interest if it's not selected
+      setValue("interests", [...current, interest]);
+    }
+  };
 
   const onSubmit = (data: FormData) => {
   const subject = encodeURIComponent("Message for you from Gmail");
@@ -286,7 +286,7 @@ ${data.name}`
                 {tags.map((tag, index) => (
                   <motion.div
                     key={index}
-                    // onClick={() => !isLoading && toggleInterest(tag)}
+                    onClick={() => toggleInterest(tag)}
                     className={classNames(
                       "uppercase cursor-pointer flex text-center px-3 2xl:px-3.5 py-2.5 2xl:py-3 text-white text-[10px] xl:text-xs",
                       {
