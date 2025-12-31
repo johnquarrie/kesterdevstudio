@@ -32,14 +32,14 @@ const Building = ({ isMobile }: { isMobile: boolean }) => {
         intensity={1.2}
         castShadow
       />
-      <pointLight intensity={10} position={[0, 0, -5]}/>
-      <pointLight intensity={10} position={[0, 0, 5]} />
-      <pointLight intensity={10} position={[-5, 0, 2]} 
+      <pointLight intensity={20} position={[0, 0, -5]}/>
+      <pointLight intensity={20} position={[0, 0, 5]} />
+      <pointLight intensity={20} position={[-5, 0, 2]} 
       // ref={lightRefx}
        />
       {/* <pointLight intensity={20} /> */}
       {/* <pointLight intensity={20} /> */}
-      <pointLight intensity={10} />
+      <pointLight intensity={20} />
       <primitive
         object={building.scene}
         scale={isMobile ? 0.04 : 0.05}
