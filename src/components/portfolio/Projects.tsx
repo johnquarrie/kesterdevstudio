@@ -17,6 +17,7 @@ const categories = [
   "2D/3D design",
   "Game Development",
   "App Development",
+  "Software/Ai Dev"
 ];
 
 interface Upload {

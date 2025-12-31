@@ -17,6 +17,17 @@ export const navLinks = [
     label: "Portfolio",
     href: "/portfolio",
   },
+  {
+    label: "Services",
+    href: "",
+    children: [
+      { label: "Real Estate Promotion", href: "/services/real-estate" },
+      // { label: "Game Development", href: "/services/game-development" },
+      // { label: "Web Development", href: "/services/web-development" },
+      // { label: "3D / 2D Animation", href: "/services/animation" },
+      // { label: "Blockchain Solutions", href: "/services/blockchain" },
+    ],
+  },
 ];
 
 export const network_images = [

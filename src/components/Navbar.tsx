@@ -132,6 +132,9 @@ const Navbar: React.FC = () => {
     return pathname.toString() === href.toString();
   };
 
+  const [openService, setOpenService] = useState(false);
+
+
   return (
     <>
       <motion.div
@@ -157,23 +160,70 @@ const Navbar: React.FC = () => {
               <p className="text-white text-sm">{isAudioOn ? "ON" : "OFF"}</p>
             </div>
           </div>
-          <div className="hidden lg:flex items-center gap-7 xl:absolute xl:left-1/2 transform xl:-translate-x-1/2 ">
-            {navLinks.map((link) => (
+          <div className="hidden lg:flex items-center gap-7 xl:absolute xl:left-1/2 transform xl:-translate-x-1/2">
+  {navLinks.map((link) =>
+    link.children ? (
+      <div
+        key={link.label}
+        className="relative"
+        onClick={() => setOpenService(!openService)}
+        onBlur={() => setOpenService(false)}
+      >
+        {/* Parent link */}
+        <span
+          className={classNames(
+            "text-base cursor-pointer transition-all duration-300",
+            {
+              "text-[#8E8E93]": isActive(link.href),
+              "text-white": !isActive(link.href),
+            }
+          )}
+        >
+          {link.label}
+        </span>
+
+        {/* Dropdown */}
+        {openService && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72
+                       bg-black/80 backdrop-blur-xl rounded-xl shadow-2xl
+                       border border-white/10 p-3"
+          >
+            {link.children.map((child) => (
               <Link
-                className={classNames(
-                  "text-base hover:scale-120 transition-all duration-300",
-                  {
-                    "text-[#8E8E93]": isActive(link.href),
-                    "text-white": !isActive(link.href),
-                  }
-                )}
-                key={link.label}
-                href={link.href}
+                key={child.href}
+                href={child.href}
+                className="block px-4 py-3 text-sm text-white
+                           hover:bg-white/10 rounded-lg transition"
               >
-                {link.label}
+                {child.label}
               </Link>
             ))}
-          </div>
+          </motion.div>
+        )}
+      </div>
+    ) : (
+      <Link
+        key={link.label}
+        href={link.href}
+        className={classNames(
+          "text-base hover:scale-120 transition-all duration-300",
+          {
+            "text-[#8E8E93]": isActive(link.href),
+            "text-white": !isActive(link.href),
+          }
+        )}
+      >
+        {link.label}
+      </Link>
+    )
+  )}
+</div>
+
           <AnimatedButton
             onClick={() => {
               navigate("/#contactUs");
