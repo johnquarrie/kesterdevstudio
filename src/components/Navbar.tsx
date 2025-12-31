@@ -9,47 +9,54 @@ import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { AnimatedButton } from "./button";
 import { TbMenu3 } from "react-icons/tb";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { navLinks } from "@/constants";
 import Menu from "./Menu";
 import useNavigate from "@/hooks/useNavigate";
 
-const DummyAudioVisualizer = ({ isActive = true }: { isActive?: boolean }) => {
+/* ----------------------------------
+   Dummy Audio Visualizer (FIXED)
+-----------------------------------*/
+const DummyAudioVisualizer = ({ isActive = false }: { isActive?: boolean }) => {
+  const [mounted, setMounted] = useState(false);
   const [bars, setBars] = useState<number[]>([]);
+
+  // Client-only mount
   useEffect(() => {
-    setBars([2, 4, 3, 6, 5, 2, 1, 4, 2, 5, 6, 8, 6, 2, 4]); // set only on client
+    setMounted(true);
+    setBars([2, 4, 3, 6, 5, 2, 1, 4, 2, 5, 6, 8, 6, 2, 4]);
   }, []);
 
-  const { width } = useWindowSize();
-
+  // Animate only after mount
   useEffect(() => {
-    if (!isActive) return;
+    if (!mounted || !isActive) return;
 
     const interval = setInterval(() => {
-      setBars((prev) => prev.map(() => Math.random() * 12 + 2));
+      setBars(prev => prev.map(() => Math.random() * 12 + 2));
     }, 150);
 
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [mounted, isActive]);
+
+  // Prevent SSR mismatch
+  if (!mounted) return null;
 
   return (
     <div
       style={{
-        background: "#6D0BDB",
+        backgroundColor: "#6D0BDB",
         borderRadius: "10px 4px 12px 4px",
-        padding: width < 400 ? "8px 12px" : "8px 20px",
+        padding: "8px 20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: 30,
-        minWidth: width < 400 ? 40 : 60,
+        height: "30px",
+        minWidth: "60px",
         position: "relative",
         boxSizing: "border-box",
-        gap: width < 400 ? "1px" : "2px",
-        clipPath: "polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px)",
+        gap: "2px",
+        clipPath: "polygon(16px 0px, 100% 0px, 100% 100%, 0px 100%, 0px 16px)",
       }}
     >
-      {/* Animated waveform bars */}
       {bars.map((height, index) => (
         <div
           key={index}
@@ -66,181 +73,156 @@ const DummyAudioVisualizer = ({ isActive = true }: { isActive?: boolean }) => {
   );
 };
 
+/* ----------------------------------
+   Navbar
+-----------------------------------*/
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(true);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isAudioOn, setIsAudioOn] = useState<boolean>(false);
-  const prevScrollPosRef = useRef<number>(0);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isAudioOn, setIsAudioOn] = useState(false);
+  const [openService, setOpenService] = useState(false);
+
+  const prevScrollPosRef = useRef(0);
+
+  // Scroll behavior (client-only)
   useEffect(() => {
-    // Set initial scroll position when component mounts
     prevScrollPosRef.current = window.scrollY;
 
-    // Function to handle scroll events
-    const handleScroll = (): void => {
-      const currentScrollPos: number = window.scrollY;
-      const isScrollingUp: boolean =
-        prevScrollPosRef.current > currentScrollPos;
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const isScrollingUp = prevScrollPosRef.current > currentScrollPos;
 
-      // Always show navbar when scrolling up, hide when scrolling down
-      // Regardless of position on the page
-      if (currentScrollPos < 10) {
-        setVisible(true); // Always show navbar at the very top of the page
-      } else {
-        setVisible(isScrollingUp);
-      }
-
-      // Separate logic for backdrop blur - apply when not at the very top
+      setVisible(currentScrollPos < 10 || isScrollingUp);
       setIsScrolled(currentScrollPos > 0);
 
-      // Update previous scroll position using ref
       prevScrollPosRef.current = currentScrollPos;
     };
 
-    // Throttle the scroll event to improve performance
-    let scrollTimeout: NodeJS.Timeout | null = null;
-    const throttledScrollHandler = (): void => {
-      if (!scrollTimeout) {
-        scrollTimeout = setTimeout(() => {
+    let timeout: NodeJS.Timeout | null = null;
+    const throttled = () => {
+      if (!timeout) {
+        timeout = setTimeout(() => {
           handleScroll();
-          scrollTimeout = null;
-        }, 10); // Small timeout for performance
+          timeout = null;
+        }, 10);
       }
     };
 
-    window.addEventListener("scroll", throttledScrollHandler);
-
-    // Clean up the event listener when component unmounts
+    window.addEventListener("scroll", throttled);
     return () => {
-      window.removeEventListener("scroll", throttledScrollHandler);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
+      window.removeEventListener("scroll", throttled);
+      if (timeout) clearTimeout(timeout);
     };
-  }, []); // Empty dependency array, using ref instead
+  }, []);
 
-  const toggleMobileNav = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const toggleAudio = () => {
-    setIsAudioOn((prev) => !prev);
-  };
-
-  const isActive = (href: string) => {
-    return pathname.toString() === href.toString();
-  };
-
-  const [openService, setOpenService] = useState(false);
-
+  const isActive = (href: string) => pathname === href;
 
   return (
     <>
       <motion.div
-        className={`fixed top-0 w-full z-50 transition-colors duration-300 ease-in-out ${
+        className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
           isScrolled ? "backdrop-blur-lg" : "bg-transparent"
         }`}
         initial={{ translateY: 0 }}
         animate={{ translateY: visible ? 0 : "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <div className="w-full container bg-transparent flex items-center justify-between py-6">
-          <div className="flex items-center gap-4 2xs:gap-5">
-            <Image
-              alt="logo"
-              className="w-24 2xs:w-28 xs:w-32"
-              src={images.logo}
-            />
+        <div className="container flex items-center justify-between py-6">
+          {/* LEFT */}
+          <div className="flex items-center gap-4">
+            <Image alt="logo" src={images.logo} className="w-28" />
             <hr className="w-0.5 h-5 bg-white rounded-full" />
             <div className="flex items-center gap-2">
-              <div onClick={toggleAudio} style={{ cursor: "pointer" }}>
+              <div
+                onClick={() => setIsAudioOn(prev => !prev)}
+                className="cursor-pointer"
+              >
                 <DummyAudioVisualizer isActive={isAudioOn} />
               </div>
               <p className="text-white text-sm">{isAudioOn ? "ON" : "OFF"}</p>
             </div>
           </div>
-          <div className="hidden lg:flex items-center gap-7 xl:absolute xl:left-1/2 transform xl:-translate-x-1/2">
-  {navLinks.map((link) =>
-    link.children ? (
-      <div
-        key={link.label}
-        className="relative"
-        onClick={() => setOpenService(!openService)}
-        onBlur={() => setOpenService(false)}
-      >
-        {/* Parent link */}
-        <span
-          className={classNames(
-            "text-base cursor-pointer transition-all duration-300",
-            {
-              "text-[#8E8E93]": isActive(link.href),
-              "text-white": !isActive(link.href),
-            }
-          )}
-        >
-          {link.label}
-        </span>
 
-        {/* Dropdown */}
-        {openService && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72
-                       bg-black/80 backdrop-blur-xl rounded-xl shadow-2xl
-                       border border-white/10 p-3"
-          >
-            {link.children.map((child) => (
-              <Link
-                key={child.href}
-                href={child.href}
-                className="block px-4 py-3 text-sm text-white
-                           hover:bg-white/10 rounded-lg transition"
-              >
-                {child.label}
-              </Link>
-            ))}
-          </motion.div>
-        )}
-      </div>
-    ) : (
-      <Link
-        key={link.label}
-        href={link.href}
-        className={classNames(
-          "text-base hover:scale-120 transition-all duration-300",
-          {
-            "text-[#8E8E93]": isActive(link.href),
-            "text-white": !isActive(link.href),
-          }
-        )}
-      >
-        {link.label}
-      </Link>
-    )
-  )}
-</div>
+          {/* CENTER */}
+          <div className="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map(link =>
+              link.children ? (
+                <div
+                  key={link.label}
+                  className="relative"
+                  onClick={() => setOpenService(prev => !prev)}
+                  onBlur={() => setOpenService(false)}
+                >
+                  <span
+                    className={classNames(
+                      "cursor-pointer transition",
+                      isActive(link.href)
+                        ? "text-[#8E8E93]"
+                        : "text-white"
+                    )}
+                  >
+                    {link.label}
+                  </span>
 
+                  {openService && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 12 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72
+                                 bg-black/80 backdrop-blur-xl rounded-xl border border-white/10 p-3"
+                    >
+                      {link.children.map(child => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-3 text-sm text-white
+                                     hover:bg-white/10 rounded-lg transition"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={classNames(
+                    "transition",
+                    isActive(link.href)
+                      ? "text-[#8E8E93]"
+                      : "text-white"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+          </div>
+
+          {/* RIGHT */}
           <AnimatedButton
-            onClick={() => {
-              navigate("/#contactUs");
-            }}
+            onClick={() => navigate("/#contactUs")}
             clipSize={14}
-            className="py-3 px-10 hidden lg:flex"
+            className="hidden lg:flex py-3 px-10"
           >
             Hire us
           </AnimatedButton>
 
           <TbMenu3
-            onClick={toggleMobileNav}
-            className="lg:hidden text-white text-3xl 2xs:text-4xl cursor-pointer"
+            onClick={() => setIsOpen(prev => !prev)}
+            className="lg:hidden text-white text-3xl cursor-pointer"
           />
         </div>
       </motion.div>
-      <Menu isOpen={isOpen} toggleMenu={toggleMobileNav} />
+
+      <Menu isOpen={isOpen} toggleMenu={() => setIsOpen(false)} />
     </>
   );
 };
