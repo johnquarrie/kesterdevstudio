@@ -33,13 +33,13 @@ const page = () => {
             {/* <p className="text-sm text-white/60 text-left mt-1 py-3">
                 Stop selling blueprints. Start selling the lifestyle.</p> */}
 <ul className="mt-3 gap-1.5 leading-6 text-sm text-white/60 text-left py-3">
-<li> <b className="text-white">Cinematic 3D Walkthroughs:</b> Transport buyers into the home before it&apos;s even built. High-end, emotional tours that turn "browsers" into "bidders."</li>
+<li> <b className="text-white">Cinematic 3D Walkthroughs:</b> Transport buyers into the home before it&apos;s even built. High-end, emotional tours that turn &quot;browsers&quot; into &quot;bidders.&quot;</li>
 
 <li> <b className="text-white">Hyper-Realistic Renders:</b> Magazine-quality interior and exterior shots designed to make your listings the most saved and shared on every platform.</li>
 
 <li> <b className="text-white">Conversion-Ready Landing Pages:</b> We don&apos;t just give you video; we build the destination. Custom, high-speed pages built to capture and qualify leads 24/7.</li>
 
-<li> <b className="text-white">Before & After "Magic":</b> The ultimate tool for renovations and off-plan sales. Visually bridge the gap between "what is" and "what could be."</li>
+<li> <b className="text-white">Before & After &quot;Magic&quot;:</b> The ultimate tool for renovations and off-plan sales. Visually bridge the gap between &quot;what is&quot; and &quot;what could be.&quot;</li>
 
 <li> <b className="text-white">Viral Social Clips (5-30s):</b> Ready-to-post Reels and TikToks designed to stop the scroll and dominate the local market feed.</li>
 </ul>
