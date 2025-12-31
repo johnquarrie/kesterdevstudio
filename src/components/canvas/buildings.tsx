@@ -38,7 +38,6 @@ const Building = ({ isMobile }: { isMobile: boolean }) => {
       // ref={lightRefx}
        />
       {/* <pointLight intensity={20} /> */}
-      {/* <pointLight intensity={20} /> */}
       <pointLight intensity={20} />
       <primitive
         object={building.scene}
