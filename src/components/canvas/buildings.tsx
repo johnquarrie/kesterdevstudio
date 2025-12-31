@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 // import * as THREE from "three";
-import { OrbitControls, Preload, useGLTF, useHelper } from "@react-three/drei";
+import { OrbitControls, Preload, useGLTF} from "@react-three/drei";
 
 import CanvasLoader from "../Loading";
 

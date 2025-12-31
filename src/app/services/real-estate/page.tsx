@@ -32,7 +32,7 @@ const page = () => {
             </h1> */}
             {/* <p className="text-sm text-white/60 text-left mt-1 py-3">
                 Stop selling blueprints. Start selling the lifestyle.</p> */}
-<ul className="mt-3 gap-1.5 leading-6 text-sm text-white/60 text-left mt-1 py-3">
+<ul className="mt-3 gap-1.5 leading-6 text-sm text-white/60 text-left py-3">
 <li> <b className="text-white">Cinematic 3D Walkthroughs:</b> Transport buyers into the home before it's even built. High-end, emotional tours that turn "browsers" into "bidders."</li>
 
 <li> <b className="text-white">Hyper-Realistic Renders:</b> Magazine-quality interior and exterior shots designed to make your listings the most saved and shared on every platform.</li>
