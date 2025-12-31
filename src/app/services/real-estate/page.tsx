@@ -1,6 +1,6 @@
-import Header from "@/components/portfolio/Header";
+// import Header from "@/components/portfolio/Header";
 import Image from "next/image";
-import Projects from "@/components/portfolio/Projects";
+// import Projects from "@/components/portfolio/Projects";
 import React from "react";
 import ServicesHeader from "./Header";
 import Network from "@/components/about/Network";
