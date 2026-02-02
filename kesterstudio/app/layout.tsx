@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Kester Dev Studio",
     images: [
       {
-        url: "https://www.kesterdevstudio.com/kester-logo.png?v=3",
+        url: "https://www.kesterdevstudio.com/kesterdev.png",
         width: 1200,
         height: 630,
         alt: "Kester Dev Studio Logo",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Kester Dev Studio",
     description:
       "Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses.",
-    images: ["https://www.kesterdevstudio.com/kester-logo.png?v=3"],
+    images: ["https://www.kesterdevstudio.com/kesterdev.png"],
   },
 };
 
@@ -50,6 +50,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta property="og:title" content="Kester Dev Studio" />
+        <meta
+          property="og:description"
+          content="Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.kesterdevstudio.com/kesterdev.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Kesterdevstudio" />
+        <meta name="twitter:image" content="https://www.kesterdevstudio.com/kesterdev.png" />
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <NextTopLoader color="#6C0BDB" showSpinner={false} />
         <main className="flex flex-col w-full relative bg-black">
