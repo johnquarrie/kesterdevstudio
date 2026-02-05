@@ -13,7 +13,7 @@ const footerLinks = [
   { label: "Contact", value: "/#contactUs" },
   { label: "Portfolio", value: "/portfolio" },
   { label: "FAQs", value: "/about/#faqs" },
-  { label: "Crypto Merchant", value: "https://coin.kesterdevstudio.com" },
+  { label: "Marketing", value: "https://marketing.kesterdevstudio.com" },
 ];
 
 const Footer = () => {
