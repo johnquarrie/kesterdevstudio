@@ -58,7 +58,7 @@ export default function RootLayout({
           <Cta />
           <Footer />
         </main>
-        <WhatsAppChatbot phoneNumber="2348163577508" />
+        <WhatsAppChatbot phoneNumber="15818917875" />
       </body>
     </html>
   );
