@@ -31,7 +31,7 @@ export default function ProjectDetails() {
     const fetchProject = async () => {
       try {
         const res = await axios.get<{ data: Project[] }>(
-          "https://kesteradeyelu.github.io/New-Tutum-Website/database.json"
+          "https://johnquarrie.github.io/New-Tutum-Website/database.json"
         );
 
         const foundProject = res.data.data.find(

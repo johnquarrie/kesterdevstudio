@@ -45,7 +45,7 @@ const Projects = () => {
       try {
         const res = await axios.get<{ data: Upload[] }>(
           // "https://kesterwebsiteupload-production.up.railway.app/uploads"
-          "https://kesteradeyelu.github.io/New-Tutum-Website/database.json"
+          "https://johnquarrie.github.io/New-Tutum-Website/database.json"
         );
         setProjects(res.data.data);
       } catch (err: unknown) {
