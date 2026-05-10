@@ -77,8 +77,7 @@ export default function RootLayout({
           content="Kester Dev Studio is a software development studio that specializes in building custom software solutions for businesses."
         />
         <meta name="twitter:image" content="https://www.kesterdevstudio.com/kesterdev.png" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2115242115792266"
-     crossorigin="anonymous"></script>
+        <meta name="google-adsense-account" content="ca-pub-2115242115792266">
       </head>
 
       <body className={`${inter.variable} antialiased`}>
